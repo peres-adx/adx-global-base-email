@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>TDD Report — Global Tests</title>
+	<link rel="stylesheet" href="../utils/styles/simplePress.css" />
+	<link rel="stylesheet" href="assets/styles/tddash.css" />
+</head>
+<body class="theme-dark">
+
+	<div class="theme-wrapper">
+
+		<header class="container text-center mt-20">
+			<h1 class="text-upper">TDD <span style="color: var(--brand-success)">API</span></h1>
+			<p>Software Architecture Integrity Report — v2.6</p>
+		</header>
+
+		<main class="container mt-20 pt-20">
+
+			<div class="row main-cards">
+
+				<div class="col-12 col-lg-4">
+					<div class="card text-center">
+						<h3 class="text-upper">Total</h3>
+						<span class="stat-number">24</span>
+					</div>
+				</div>
+				<div class="col-12 col-lg-4">
+					<div class="card text-center">
+						<h3 class="text-upper" style="color: var(--brand-success)">Success</h3>
+						<span class="stat-number" style="color: var(--brand-success)">22</span>
+					</div>
+				</div>
+				<div class="col-12 col-lg-4">
+					<div class="card text-center">
+						<h3 class="text-upper" style="color: var(--brand-error)">Failures</h3>
+						<span class="stat-number" style="color: var(--brand-error)">2</span>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="row">
+
+				<div class="col-12">
+
+					<div class="ux-guide-banner">
+						<h4>Documento de Auditoria de Testes Unitários</h4>
+						<p>
+							Este documento audita a integridade das regras de negócio do software. O status indicador 
+							<strong style="color: var(--brand-success)">PASS</strong> comprova que o sistema se comportou 
+							<strong>exatamente como esperado</strong> pelo negócio.
+						</p>
+					</div>
+
+				</div>
+
+				<div class="col-12">
+
+					<div class="dashboard-filters">
+						<button class="filter-btn active" data-filter="all">🔵 Todos <span class="badge-count">24</span></button>
+						<button class="filter-btn" data-filter="pass">🟢 Pass <span class="badge-count btn-pass">22</span></button>
+						<button class="filter-btn" data-filter="fail">🔴 Fail <span class="badge-count btn-fail">2</span></button>
+					</div>
+
+				</div>
+
+			</div>
+
+			
+			<section>
+				<h2 class="text-upper" style="font-size: 0.9rem; color: #4B89CF; letter-spacing: 1px;">
+					<p>Suite: CpfTest</p>
+				</h2>
+
+				
+				<div class="test-row" data-status="pass" >
+
+					<div class="test-details">
+
+						<div class="test-title-wrapper">
+							<span class="test-title">CPF válido (com e sem caracteres de máscara)</span>
+							<span class="intent-badge success-type">Validação de fluxo</span>
+						</div>
+
+						<div class="test-guide">
+							<strong>Status esperado:</strong> O sistema deve aceitar o documento e prosseguir sem restrições.						</div>
+
+						<div class="test-technical">
+							<code>testDeveAceitarCpfValidoComESemMascara</code>
+													</div>
+
+					</div>
+
+					<div class="test-status">
+						<span class="status-badge pass">PASS</span>
+					</div>
+
+				</div>
+
+				
+				<div class="test-row" data-status="pass" >
+
+					<div class="test-details">
+
+						<div class="test-title-wrapper">
+							<span class="test-title">CPF com dígitos verificadores inválidos</span>
+							<span class="intent-badge fail-type">Validação de bloqueio</span>
+						</div>
+
+						<div class="test-guide">
+							<strong>Status esperado:</strong> O sistema deve recalcular os dígitos, detectar a inconsistência matemática e impedir o avanço.						</div>
+
+						<div class="test-technical">
+							<code>testDeveFalharComCpfMatematicamenteInvalido</code>
+													</div>
+
+					</div>
+
+					<div class="test-status">
+						<span class="status-badge pass">PASS</span>
+					</div>
+
+				</div>
+
+				
+				<div class="test-row" data-status="pass" >
+
+					<div class="test-details">
+
+						<div class="test-title-wrapper">
+							<span class="test-title">CPF com quantidade incorreta de caracteres</span>
+							<span class="intent-badge fail-type">Validação de bloqueio</span>
+						</div>
+
+						<div class="test-guide">
+							<strong>Status esperado:</strong> O sistema deve rejeitar de forma imediata qualquer entrada que não possua exatamente 11 dígitos.						</div>
+
+						<div class="test-technical">
+							<code>testDeveFalharComCpfDeTamanhoErrado</code>
+													</div>
+
+					</div>
+
+					<div class="test-status">
+						<span class="status-badge pass">PASS</span>
+					</div>
+
+				</div>
+
+				
+				<div class="test-row" data-status="pass" >
+
+					<div class="test-details">
+
+						<div class="test-title-wrapper">
+							<span class="test-title">CPF composto por números repetidos / sequências</span>
+							<span class="intent-badge fail-type">Validação de bloqueio</span>
+						</div>
+
+						<div class="test-guide">
+							<strong>Status esperado:</strong> O sistema deve identificar e bloquear fraudes conhecidas por repetição (ex: 111.111.111-11).						</div>
+
+						<div class="test-technical">
+							<code>testDeveFalharComCpfDeNumerosRepetidos</code>
+													</div>
+
+					</div>
+
+					<div class="test-status">
+						<span class="status-badge pass">PASS</span>
+					</div>
+
+				</div>
+
+							</section>
+			
+			<section>
+				<h2 class="text-upper" style="font-size: 0.9rem; color: #4B89CF; letter-spacing: 1px;">
+					<p>Suite: EmailTest</p>
+				</h2>
+
+				
+				<div class="test-row" data-status="pass" >
+
+					<div class="test-details">
+
+						<div class="test-title-wrapper">
+							<span class="test-title">Validação de formato de e-mail corporativo e estruturas — Cenário: E-mail válido Hausti</span>
+							<span class="intent-badge success-type">Validação de fluxo</span>
+						</div>
+
+						<div class="test-guide">
+							<strong>Status esperado:</strong> O sistema deve validar a RFC do e-mail e certificar a existência de nós de domínio legítimos.						</div>
+
+						<div class="test-technical">
+							<code>testValidacaoDeEmail with data set &quot;E-mail válido Hausti&quot;</code>
+													</div>
+
+					</div>
+
+					<div class="test-status">
+						<span class="status-badge pass">PASS</span>
+					</div>
+
+				</div>
+
+				
+				<div class="test-row" data-status="pass" >
+
+					<div class="test-details">
+
+						<div class="test-title-wrapper">
+							<span class="test-title">Validação de formato de e-mail corporativo e estruturas — Cenário: E-mail com subdomínio</span>
+							<span class="intent-badge success-type">Validação de fluxo</span>
+						</div>
+
+						<div class="test-guide">
+							<strong>Status esperado:</strong> O sistema deve validar a RFC do e-mail e certificar a existência de nós de domínio legítimos.						</div>
+
+						<div class="test-technical">
+							<code>testValidacaoDeEmail with data set &quot;E-mail com subdomínio&quot;</code>
+													</div>
+
+					</div>
+
+					<div class="test-status">
+						<span class="status-badge pass">PASS</span>
+					</div>
+
+				</div>
+
+				
+				<div class="test-row" data-status="pass" >
+
+					<div class="test-details">
+
+						<div class="test-title-wrapper">
+							<span class="test-title">Validação de formato de e-mail corporativo e estruturas — Cenário: E-mail vazio</span>
+							<span class="intent-badge success-type">Validação de fluxo</span>
+						</div>
+
+						<div class="test-guide">
+							<strong>Status esperado:</strong> O sistema deve validar a RFC do e-mail e certificar a existência de nós de domínio legítimos.						</div>
+
+						<div class="test-technical">
+							<code>testValidacaoDeEmail with data set &quot;E-mail vazio&quot;</code>
+													</div>
+
+					</div>
+
+					<div class="test-status">
+						<span class="status-badge pass">PASS</span>
+					</div>
+
+				</div>
+
+				
+				<div class="test-row" data-status="pass" >
+
+					<div class="test-details">
+
+						<div class="test-title-wrapper">
+							<span class="test-title">Validação de formato de e-mail corporativo e estruturas — Cenário: E-mail sem arroba</span>
+							<span class="intent-badge success-type">Validação de fluxo</span>
+						</div>
+
+						<div class="test-guide">
+							<strong>Status esperado:</strong> O sistema deve validar a RFC do e-mail e certificar a existência de nós de domínio legítimos.						</div>
+
+						<div class="test-technical">
+							<code>testValidacaoDeEmail with data set &quot;E-mail sem arroba&quot;</code>
+													</div>
+
+					</div>
+
+					<div class="test-status">
+						<span class="status-badge pass">PASS</span>
+					</div>
+
+				</div>
+
+				
+				<div class="test-row" data-status="pass" >
+
+					<div class="test-details">
+
+						<div class="test-title-wrapper">
+							<span class="test-title">Validação de formato de e-mail corporativo e estruturas — Cenário: E-mail sem domínio</span>
+							<span class="intent-badge success-type">Validação de fluxo</span>
+						</div>
+
+						<div class="test-guide">
+							<strong>Status esperado:</strong> O sistema deve validar a RFC do e-mail e certificar a existência de nós de domínio legítimos.						</div>
+
+						<div class="test-technical">
+							<code>testValidacaoDeEmail with data set &quot;E-mail sem domínio&quot;</code>
+													</div>
+
+					</div>
+
+					<div class="test-status">
+						<span class="status-badge pass">PASS</span>
+					</div>
+
+				</div>
+
+				
+				<div class="test-row" data-status="pass" >
+
+					<div class="test-details">
+
+						<div class="test-title-wrapper">
+							<span class="test-title">Validação de formato de e-mail corporativo e estruturas — Cenário: E-mail apenas espaços</span>
+							<span class="intent-badge success-type">Validação de fluxo</span>
+						</div>
+
+						<div class="test-guide">
+							<strong>Status esperado:</strong> O sistema deve validar a RFC do e-mail e certificar a existência de nós de domínio legítimos.						</div>
+
+						<div class="test-technical">
+							<code>testValidacaoDeEmail with data set &quot;E-mail apenas espaços&quot;</code>
+													</div>
+
+					</div>
+
+					<div class="test-status">
+						<span class="status-badge pass">PASS</span>
+					</div>
+
+				</div>
+
+				
+				<div class="test-row" data-status="pass" >
+
+					<div class="test-details">
+
+						<div class="test-title-wrapper">
+							<span class="test-title">Validação de formato de e-mail corporativo e estruturas — Cenário: E-mail inválido</span>
+							<span class="intent-badge success-type">Validação de fluxo</span>
+						</div>
+
+						<div class="test-guide">
+							<strong>Status esperado:</strong> O sistema deve validar a RFC do e-mail e certificar a existência de nós de domínio legítimos.						</div>
+
+						<div class="test-technical">
+							<code>testValidacaoDeEmail with data set &quot;E-mail inválido&quot;</code>
+													</div>
+
+					</div>
+
+					<div class="test-status">
+						<span class="status-badge pass">PASS</span>
+					</div>
+
+				</div>
+
+							</section>
+			
+			<section>
+				<h2 class="text-upper" style="font-size: 0.9rem; color: #4B89CF; letter-spacing: 1px;">
+					<p>Suite: MockFailureTest</p>
+				</h2>
+
+				
+				<div class="test-row" data-status="fail" style="border-left: 4px solid var(--brand-error);">
+
+					<div class="test-details">
+
+						<div class="test-title-wrapper">
+							<span class="test-title">Test Simular Falha De Validacao</span>
+							<span class="intent-badge success-type">Validação de fluxo</span>
+						</div>
+
+						<div class="test-guide">
+							<strong>Status esperado:</strong> O sistema deve processar a operação respeitando as restrições arquiteturais.						</div>
+
+						<div class="test-technical">
+							<code>testSimularFalhaDeValidacao</code>
+														<div class="failure-box">Tests\Unit\Domain\ValueObjects\MockFailureTest::testSimularFalhaDeValidacao
+A API retornou status de falha inesperado.
+Failed asserting that two strings are identical.
+--- Expected
++++ Actual
+@@ @@
+-&#039;success&#039;
++&#039;failed&#039;
+
+D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\MockFailureTest.php:17</div>
+													</div>
+
+					</div>
+
+					<div class="test-status">
+						<span class="status-badge fail">FAIL</span>
+					</div>
+
+				</div>
+
+				<div class='failure-details'><strong>Detalhes da Falha:</strong> </div>
+				<div class="test-row" data-status="fail" style="border-left: 4px solid var(--brand-error);">
+
+					<div class="test-details">
+
+						<div class="test-title-wrapper">
+							<span class="test-title">Test Simular Erro Calculo Dígito</span>
+							<span class="intent-badge success-type">Validação de fluxo</span>
+						</div>
+
+						<div class="test-guide">
+							<strong>Status esperado:</strong> O sistema deve processar a operação respeitando as restrições arquiteturais.						</div>
+
+						<div class="test-technical">
+							<code>testSimularErroCalculoDígito</code>
+														<div class="failure-box">Tests\Unit\Domain\ValueObjects\MockFailureTest::testSimularErroCalculoDígito
+O dígito verificador calculado matematicamente está incorreto.
+Failed asserting that 5 matches expected 9.
+
+D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\MockFailureTest.php:27</div>
+													</div>
+
+					</div>
+
+					<div class="test-status">
+						<span class="status-badge fail">FAIL</span>
+					</div>
+
+				</div>
+
+				<div class='failure-details'><strong>Detalhes da Falha:</strong> </div>			</section>
+			
+			<section>
+				<h2 class="text-upper" style="font-size: 0.9rem; color: #4B89CF; letter-spacing: 1px;">
+					<p>Suite: PasswordTest</p>
+				</h2>
+
+				
+				<div class="test-row" data-status="pass" >
+
+					<div class="test-details">
+
+						<div class="test-title-wrapper">
+							<span class="test-title">Test Validacao De Senha With Data Set &quot; Senha Válida&quot; — Cenário: Senha válida</span>
+							<span class="intent-badge success-type">Validação de fluxo</span>
+						</div>
+
+						<div class="test-guide">
+							<strong>Status esperado:</strong> O sistema deve processar a operação respeitando as restrições arquiteturais.						</div>
+
+						<div class="test-technical">
+							<code>testValidacaoDeSenha with data set &quot;Senha válida&quot;</code>
+													</div>
+
+					</div>
+
+					<div class="test-status">
+						<span class="status-badge pass">PASS</span>
+					</div>
+
+				</div>
+
+				
+				<div class="test-row" data-status="pass" >
+
+					<div class="test-details">
+
+						<div class="test-title-wrapper">
+							<span class="test-title">Test Validacao De Senha With Data Set &quot; Senha Vazia&quot; — Cenário: Senha vazia</span>
+							<span class="intent-badge success-type">Validação de fluxo</span>
+						</div>
+
+						<div class="test-guide">
+							<strong>Status esperado:</strong> O sistema deve processar a operação respeitando as restrições arquiteturais.						</div>
+
+						<div class="test-technical">
+							<code>testValidacaoDeSenha with data set &quot;Senha vazia&quot;</code>
+													</div>
+
+					</div>
+
+					<div class="test-status">
+						<span class="status-badge pass">PASS</span>
+					</div>
+
+				</div>
+
+				
+				<div class="test-row" data-status="pass" >
+
+					<div class="test-details">
+
+						<div class="test-title-wrapper">
+							<span class="test-title">Test Validacao De Senha With Data Set &quot; Senha Curta&quot; — Cenário: Senha curta</span>
+							<span class="intent-badge success-type">Validação de fluxo</span>
+						</div>
+
+						<div class="test-guide">
+							<strong>Status esperado:</strong> O sistema deve processar a operação respeitando as restrições arquiteturais.						</div>
+
+						<div class="test-technical">
+							<code>testValidacaoDeSenha with data set &quot;Senha curta&quot;</code>
+													</div>
+
+					</div>
+
+					<div class="test-status">
+						<span class="status-badge pass">PASS</span>
+					</div>
+
+				</div>
+
+				
+				<div class="test-row" data-status="pass" >
+
+					<div class="test-details">
+
+						<div class="test-title-wrapper">
+							<span class="test-title">Test Reconstituicao De Hash With Data Set &quot; Hash Válido&quot; — Cenário: Hash válido</span>
+							<span class="intent-badge success-type">Validação de fluxo</span>
+						</div>
+
+						<div class="test-guide">
+							<strong>Status esperado:</strong> O sistema deve processar a operação respeitando as restrições arquiteturais.						</div>
+
+						<div class="test-technical">
+							<code>testReconstituicaoDeHash with data set &quot;Hash válido&quot;</code>
+													</div>
+
+					</div>
+
+					<div class="test-status">
+						<span class="status-badge pass">PASS</span>
+					</div>
+
+				</div>
+
+				
+				<div class="test-row" data-status="pass" >
+
+					<div class="test-details">
+
+						<div class="test-title-wrapper">
+							<span class="test-title">Test Reconstituicao De Hash With Data Set &quot; Hash Vazio&quot; — Cenário: Hash vazio</span>
+							<span class="intent-badge success-type">Validação de fluxo</span>
+						</div>
+
+						<div class="test-guide">
+							<strong>Status esperado:</strong> O sistema deve processar a operação respeitando as restrições arquiteturais.						</div>
+
+						<div class="test-technical">
+							<code>testReconstituicaoDeHash with data set &quot;Hash vazio&quot;</code>
+													</div>
+
+					</div>
+
+					<div class="test-status">
+						<span class="status-badge pass">PASS</span>
+					</div>
+
+				</div>
+
+							</section>
+			
+			<section>
+				<h2 class="text-upper" style="font-size: 0.9rem; color: #4B89CF; letter-spacing: 1px;">
+					<p>Suite: UuidTest</p>
+				</h2>
+
+				
+				<div class="test-row" data-status="pass" >
+
+					<div class="test-details">
+
+						<div class="test-title-wrapper">
+							<span class="test-title">Test Validacao De Uuid With Data Set &quot; U U I D Válido Com Hifens&quot; — Cenário: UUID Válido Com Hifens</span>
+							<span class="intent-badge success-type">Validação de fluxo</span>
+						</div>
+
+						<div class="test-guide">
+							<strong>Status esperado:</strong> O sistema deve processar a operação respeitando as restrições arquiteturais.						</div>
+
+						<div class="test-technical">
+							<code>testValidacaoDeUuid with data set &quot;UUID Válido Com Hifens&quot;</code>
+													</div>
+
+					</div>
+
+					<div class="test-status">
+						<span class="status-badge pass">PASS</span>
+					</div>
+
+				</div>
+
+				
+				<div class="test-row" data-status="pass" >
+
+					<div class="test-details">
+
+						<div class="test-title-wrapper">
+							<span class="test-title">Test Validacao De Uuid With Data Set &quot; U U I D Válido Sem Hifens&quot; — Cenário: UUID Válido Sem Hifens</span>
+							<span class="intent-badge success-type">Validação de fluxo</span>
+						</div>
+
+						<div class="test-guide">
+							<strong>Status esperado:</strong> O sistema deve processar a operação respeitando as restrições arquiteturais.						</div>
+
+						<div class="test-technical">
+							<code>testValidacaoDeUuid with data set &quot;UUID Válido Sem Hifens&quot;</code>
+													</div>
+
+					</div>
+
+					<div class="test-status">
+						<span class="status-badge pass">PASS</span>
+					</div>
+
+				</div>
+
+				
+				<div class="test-row" data-status="pass" >
+
+					<div class="test-details">
+
+						<div class="test-title-wrapper">
+							<span class="test-title">Test Validacao De Uuid With Data Set &quot; U U I D Inválido Formato&quot; — Cenário: UUID Inválido Formato</span>
+							<span class="intent-badge success-type">Validação de fluxo</span>
+						</div>
+
+						<div class="test-guide">
+							<strong>Status esperado:</strong> O sistema deve processar a operação respeitando as restrições arquiteturais.						</div>
+
+						<div class="test-technical">
+							<code>testValidacaoDeUuid with data set &quot;UUID Inválido Formato&quot;</code>
+													</div>
+
+					</div>
+
+					<div class="test-status">
+						<span class="status-badge pass">PASS</span>
+					</div>
+
+				</div>
+
+				
+				<div class="test-row" data-status="pass" >
+
+					<div class="test-details">
+
+						<div class="test-title-wrapper">
+							<span class="test-title">Test Validacao De Uuid With Data Set &quot; U U I D Vazio&quot; — Cenário: UUID Vazio</span>
+							<span class="intent-badge success-type">Validação de fluxo</span>
+						</div>
+
+						<div class="test-guide">
+							<strong>Status esperado:</strong> O sistema deve processar a operação respeitando as restrições arquiteturais.						</div>
+
+						<div class="test-technical">
+							<code>testValidacaoDeUuid with data set &quot;UUID Vazio&quot;</code>
+													</div>
+
+					</div>
+
+					<div class="test-status">
+						<span class="status-badge pass">PASS</span>
+					</div>
+
+				</div>
+
+				
+				<div class="test-row" data-status="pass" >
+
+					<div class="test-details">
+
+						<div class="test-title-wrapper">
+							<span class="test-title">Test Geracao Dinamica De Uuid</span>
+							<span class="intent-badge success-type">Validação de fluxo</span>
+						</div>
+
+						<div class="test-guide">
+							<strong>Status esperado:</strong> O sistema deve processar a operação respeitando as restrições arquiteturais.						</div>
+
+						<div class="test-technical">
+							<code>testGeracaoDinamicaDeUuid</code>
+													</div>
+
+					</div>
+
+					<div class="test-status">
+						<span class="status-badge pass">PASS</span>
+					</div>
+
+				</div>
+
+				
+				<div class="test-row" data-status="pass" >
+
+					<div class="test-details">
+
+						<div class="test-title-wrapper">
+							<span class="test-title">Test Reconstituicao De Binario</span>
+							<span class="intent-badge success-type">Validação de fluxo</span>
+						</div>
+
+						<div class="test-guide">
+							<strong>Status esperado:</strong> O sistema deve processar a operação respeitando as restrições arquiteturais.						</div>
+
+						<div class="test-technical">
+							<code>testReconstituicaoDeBinario</code>
+													</div>
+
+					</div>
+
+					<div class="test-status">
+						<span class="status-badge pass">PASS</span>
+					</div>
+
+				</div>
+
+							</section>
+			
+		</main>
+
+		<footer class="container text-center mt-20 pt-20">
+			<p>© 2026 ADX | TDD Architected by <strong>Rafael Peres</strong></p>
+		</footer>
+
+	</div>
+
+<script type="text/javascript">
+
+	document.addEventListener('DOMContentLoaded', () => {
+
+		console.log("[TDDash] Dashboard interativo carregado. Pronto para filtrar os testes!");
+
+		const buttons		= document.querySelectorAll('.filter-btn');
+		const rows			= document.querySelectorAll('.test-row');
+		const sections	= document.querySelectorAll('main section');
+
+		buttons.forEach(button => {
+
+			button.addEventListener('click', () => {
+
+				buttons.forEach(btn => btn.classList.remove('active'));
+				button.classList.add('active');
+
+				const filterValue = button.getAttribute('data-filter');
+
+				rows.forEach(row => {
+					const status = row.getAttribute('data-status');
+					if (filterValue === 'all' || status === filterValue) {
+						row.classList.remove('hide-by-filter');
+					} else {
+						row.classList.add('hide-by-filter');
+					}
+				});
+
+				sections.forEach(section => {
+
+					const totalRows = section.querySelectorAll('.test-row').length;
+					const hiddenRows = section.querySelectorAll('.test-row.hide-by-filter').length;
+
+					if (totalRows === hiddenRows) {
+						section.classList.add('hide-by-filter');
+					} else {
+						section.classList.remove('hide-by-filter');
+					}
+
+				});
+
+			});
+
+		});
+
+	});
+
+</script>
+</body>
+</html>
+

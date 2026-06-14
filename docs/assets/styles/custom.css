@@ -1,0 +1,735 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght=400;500;600;700&display=swap');
+
+html {
+	box-sizing: border-box;
+	overflow-y: scroll;
+}
+
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+body {
+	font-size: 15px !important;
+	font-weight: 400;
+	margin: 0 !important;
+	margin-bottom: 70px !important;
+}
+
+.swagger-ui, .swagger-ui * {
+	font-family: 'Poppins', sans-serif !important;
+	text-align: left;
+}
+
+/* ==========================================================================
+   HEADER & TOPBAR INFRASTRUCTURE
+   ========================================================================== */
+.swagger-ui .topbar {
+	background-color: #000 !important;
+	padding: 20px 0 !important;
+}
+
+	.swagger-ui .topbar .download-url-wrapper, .dark-mode-toggle {
+		visibility: hidden !important;
+	}
+
+.swagger-ui .wrapper {
+	box-sizing: border-box;
+	margin: 0 auto;
+	max-width: 1440px !important;
+	padding: 0 20px;
+	width: 100% !important;
+}
+
+	.swagger-ui .info {
+		align-items: flex-start !important;
+		background-color: #1E222B !important;
+		border: 1px solid #333 !important;
+		border-bottom: none !important;
+		border-top: 4px solid #85EA2D !important;
+		border-top-left-radius: 5px !important;
+		border-top-right-radius: 5px !important;
+		box-sizing: border-box !important;
+		display: flex !important;
+		flex-wrap: wrap !important;
+		gap: 20px;
+		justify-content: space-between !important;
+		margin: 20px auto 0 !important;
+		padding: 35px 30px 15px !important;
+	}
+
+		.swagger-ui .info .title {
+			color: #DFDFDF !important;
+			font-size: 32px !important;
+			font-weight: 500 !important;
+			margin: 0 !important;
+			padding: 0 !important;
+		}
+
+.swagger-ui .info .title small,
+.swagger-ui .info .version,
+.swagger-ui .info .oas3,
+.swagger-ui .info .info__ext-link {
+	display: none !important;
+}
+
+.swagger-ui .info > div:first-child,
+.swagger-ui .info .info__header {
+	display: block !important;
+	flex: 1 !important;
+	min-width: 300px !important;
+}
+
+.swagger-ui .info .description:hover::before {
+	color: #85EA2D !important;
+	text-decoration: underline;
+}
+
+/* ==========================================================================
+   SCHEME & SERVERS CONTROLLERS
+   ========================================================================== */
+.swagger-ui .scheme-container {
+	align-items: flex-start !important;
+	background-color: #1E222B !important; 
+	border: 1px solid #333 !important;
+	border-top: none !important;
+	border-bottom-left-radius: 5px !important;
+	border-bottom-right-radius: 5px !important;
+	box-shadow: none !important;
+	box-sizing: border-box !important;
+	display: flex !important;
+	flex-direction: column !important;
+	margin: 0 auto !important;
+	max-width: 1400px !important;
+	padding: 15px 40px 50px !important;
+	position: relative !important;
+	width: 100%;
+}
+
+	.swagger-ui .scheme-container .schemes {
+		background: transparent !important;
+		margin: 0 !important;
+		padding: 0 !important;
+		width: 100% !important;
+	}
+
+.swagger-ui .servers {
+	align-items: flex-end !important;
+	display: flex !important;
+	flex-direction: column !important;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+	.swagger-ui .servers-title, .swagger-ui .servers h4 {
+		display: block !important;
+		font-size: 0 !important;
+		line-height: 1 !important;
+		padding-bottom: 10px !important;
+	}
+
+	.swagger-ui .servers h4 {
+		margin: 10px 0 !important;
+	}
+
+		.swagger-ui .servers-title::before, .swagger-ui .servers h4::before {
+			color: #EFEFEF !important;
+			font-size: 16px !important;
+			font-weight: 700 !important;
+			letter-spacing: 1px !important;
+		}
+
+		.swagger-ui .servers-title::before	{ content: "HOST"; }
+		.swagger-ui .servers h4::before			{ content: "BANCO DE DADOS"; }
+
+.swagger-ui .servers > label,
+.swagger-ui .servers > select {
+	display: none !important;
+}
+
+.swagger-ui .servers .computed-url {
+	display: block !important;
+	font-size: 0 !important;
+	margin-bottom: 20px !important;
+}
+
+	.swagger-ui .servers .computed-url code {
+		background-color: transparent !important;
+		color: #CACACA !important;
+		display: inline-block !important;
+		font-size: 15px !important;
+		font-weight: 400 !important;
+		margin: 0 !important;
+		padding: 0 0 10px 0 !important;
+	}
+
+	.core-auth-alert-success {
+		color: #73DF0E;
+		font-size: 15px;
+		font-weight: 500;
+		margin: 20px auto 0;
+		text-align: center;
+	}
+
+/* ==========================================================================
+   SWAGGER NATIVE TABLE DESTRUCTION
+   ========================================================================== */
+.swagger-ui table tbody tr td:first-child {
+	display: none !important;
+}
+
+.swagger-ui .servers-table,
+.swagger-ui table tbody tr,
+.swagger-ui table tbody tr td:last-child {
+	background: transparent !important;
+	border: none !important;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+.swagger-ui table tbody tr {
+	align-items: center !important;
+	gap: 15px !important;
+}
+
+.swagger-ui table tbody tr td {
+	vertical-align: middle !important;
+}
+
+/* ==========================================================================
+   GLOBAL SELECT SYSTEM
+   ========================================================================== */
+.swagger-ui select {
+	appearance: none !important;
+	-webkit-appearance: none !important;
+	-moz-appearance: none !important;
+	background: #000 url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23B7BCBF' d='M13.418 7.859a.695.695 0 0 1 .978 0 .68.68 0 0 1 0 .969l-3.908 3.83a.697.697 0 0 1-.979 0l-3.908-3.83a.68.68 0 0 1 0-.969.695.695 0 0 1 .978 0L10 11z'/%3E%3C/svg%3E") right 10px center no-repeat !important;
+	border: 1px solid #AAA !important;
+	border-radius: 0 !important;
+	box-shadow: none !important;
+	color: #F0F1F1 !important;
+	cursor: pointer !important;
+	font-family: 'Poppins', sans-serif !important;
+	font-size: 15px !important;
+	font-weight: 400 !important;
+	gap: 10px !important;
+	height: 70px !important;
+	justify-content: center !important;
+	max-height: 70px !important;
+	min-height: 70px !important;
+	min-width: 250px !important;
+	padding: 0 70px 0 40px !important;
+	transition: all 0.7s ease !important;
+}
+
+	.swagger-ui select:hover {
+		background-color: #1C2022 !important;
+		background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%2385EA2D' d='M13.418 7.859a.695.695 0 0 1 .978 0 .68.68 0 0 1 0 .969l-3.908 3.83a.697.697 0 0 1-.979 0l-3.908-3.83a.68.68 0 0 1 0-.969.695.695 0 0 1 .978 0L10 11z'/%3E%3C/svg%3E") !important;
+		border-color: #A5D37C !important;
+		color: #B1B1B1 !important;
+	}
+
+.swagger-ui select[data-variable="database"] {
+	max-width: 360px !important;
+	width: 360px !important;
+}
+
+.swagger-ui select[disabled] {
+	background-color: #121415 !important;
+	cursor: not-allowed !important;
+	opacity: 0.4 !important;
+	pointer-events: none !important;
+}
+
+/* ==========================================================================
+   GLOBAL BUTTON SYSTEM
+   ========================================================================== */
+.swagger-ui .btn.execute,
+.swagger-ui .btn.authorize,
+.swagger-ui .btn.cancel,
+.swagger-ui .btn-clear,
+.swagger-ui .modal-ux .btn,
+.swagger-ui .try-out button,
+button#core-btn-logout {
+	align-items: center !important;
+	background-color: #000 !important;
+	border: 1px solid #AAA !important;
+	border-radius: 0 !important;
+	box-shadow: none !important;
+	color: #F0F1F1 !important;
+	cursor: pointer !important;
+	display: inline-flex;
+	font-family: 'Poppins', sans-serif !important;
+	font-size: 15px !important;
+	font-weight: 400 !important;
+	gap: 10px !important;
+	height: 70px !important;
+	justify-content: center !important;
+	max-height: 70px !important;
+	min-height: 70px !important;
+	padding-left: 50px !important;
+	padding-right: 50px !important;
+	transition: all 0.7s ease !important;
+}
+
+.auth-wrapper button#core-btn-logout {
+	display: flex !important;
+	margin: 0 !important;
+}
+
+.swagger-ui .btn svg,
+.swagger-ui .opblock .execute svg,
+.swagger-ui .opblock .btn-group .clear svg {
+	fill: #B7BCBF !important;
+	height: 16px !important;
+	transition: fill 0.3s ease !important;
+	width: 16px !important;
+}
+
+.swagger-ui .btn.execute:hover,
+.swagger-ui .btn.authorize:hover,
+.swagger-ui .btn.cancel:hover,
+.swagger-ui .btn-clear:hover,
+.swagger-ui .modal-ux .btn:hover,
+.swagger-ui .try-out button:hover,
+button#core-btn-logout:hover {
+	background-color: #1C2022 !important;
+	border-color: #A5D37C !important;
+	color: #A5D37C !important;
+}
+
+.swagger-ui .btn:hover svg,
+.swagger-ui .opblock .execute:hover svg,
+.swagger-ui .opblock .btn-group .clear:hover svg {
+	fill: #A5D37C !important;
+}
+
+.swagger-ui .btn.authorize span {
+	display: inline-block !important;
+	float: none !important;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+.swagger-ui .btn.authorize svg {
+	display: block !important;
+	margin: 0 !important;
+}
+
+/* ==========================================================================
+   STATE CONTROL ENGINE (VISIBILITY AND ANIMATIONS)
+   ========================================================================== */
+.swagger-ui section.block.col-12.block-desktop.col-12-desktop,
+.swagger-ui.custom-section, 
+button.btn.authorize {
+	display: none !important;
+	opacity: 0 !important;
+	transform: translateY(-70px) !important;
+	transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+	            transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+	            visibility 0.4s !important;
+	visibility: hidden !important;
+}
+
+.swagger-ui section.block.col-12.block-desktop.col-12-desktop.core-display-block {
+	display: block !important;
+	margin-top: 30px !important;
+}
+
+.swagger-ui.custom-section.core-display-block {
+	display: block !important;
+}
+
+button.btn.authorize.core-display-block {
+	display: inline-flex !important;
+}
+
+.swagger-ui section.block.col-12.block-desktop.col-12-desktop.core-animate-active,
+.swagger-ui.custom-section.core-animate-active,
+button.btn.authorize.core-display-block {
+	opacity: 1 !important;
+	transform: translateY(0) !important;
+	visibility: visible !important;
+}
+
+.core-welcome-screen[style*="display: none"] {
+	display: none !important;
+	height: 0 !important;
+	margin: 0 !important;
+	opacity: 0 !important;
+	padding: 0 !important;
+}
+
+.core-welcome-screen {
+	opacity: 0;
+	transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+.core-welcome-screen.core-display-block {
+	display: block !important;
+	opacity: 1 !important;
+}
+
+.core-welcome-screen.core-fade-out {
+	opacity: 0 !important;
+}
+
+.core-panel-container {
+	display: none;
+	opacity: 0;
+	transform: translateY(-70px);
+	transition: opacity 0.4s ease-out, transform 0.4s ease-out, visibility 0.4s !important;
+	visibility: hidden;
+}
+
+.core-panel-container.core-display-block {
+	display: block !important;
+	opacity: 1 !important;
+	transform: translateY(0) !important;
+	visibility: visible !important;
+}
+
+.core-panel-container.core-fade-out {
+	opacity: 0 !important;
+	transform: translateY(-70px) !important;
+	visibility: hidden !important;
+}
+
+/* ==========================================================================
+	 CUSTOM INTRO SECTION
+	 ========================================================================== */
+
+.custom-section {
+	background: #1E222B !important;
+	border: 1px solid #333 !important;
+	border-radius: 5px !important;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+	margin-top: 50px !important;
+	padding: 50px 40px !important;
+	position: relative !important;
+}
+
+.border-top-primary {
+	border-top: 4px solid #85EA2D !important;
+}
+
+.welcome-card {
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+	/* margin-top: 50px; */
+	text-align: center !important;
+}
+
+.welcome-badge {
+	background: rgba(234, 45, 45, 0.1) !important;
+	border: 1px solid rgba(234, 45, 45, 0.2) !important;
+	border-radius: 2px !important;
+	color: #FF5C5C !important;
+	display: inline-block !important;
+	font-family: monospace !important;
+	font-size: 13px !important;
+	font-weight: bold !important;
+	letter-spacing: 3px !important;
+	margin-bottom: 30px !important;
+	padding: 15px 35px !important;
+	text-transform: uppercase !important;
+}
+
+.welcome-title {
+	color: #FFF !important;
+	font-size: 25px !important;
+	font-weight: 400 !important;
+	margin: 10px auto 30px !important;
+	text-align: center;
+}
+
+.welcome-subtitle {
+	color: #CFCFCF !important;
+	font-size: 15px !important;
+	margin: 0 auto 50px auto !important;
+	max-width: 780px !important;
+	text-align: center !important;
+	width: 100% !important;
+}
+
+	.welcome-subtitle strong {
+		color: #FFF !important;
+	}
+
+.welcome-instruction-box {
+	align-items: center !important;
+	background: #14171E !important;
+	border: 1px solid #252932 !important;
+	border-radius: 4px !important;
+	display: flex !important;
+	gap: 15px !important;
+	justify-content: center !important;
+	margin: 0 auto !important;
+	max-width: 800px !important;
+	padding: 20px 30px !important;
+}
+
+.instruction-step {
+	align-items: center !important;
+	background: #2D3139 !important;
+	border-radius: 50px !important;
+	color: #85EA2D !important;
+	display: flex !important;
+	font-family: monospace !important;
+	font-weight: bold !important;
+	font-size: 14px !important;
+	flex-shrink: 0 !important;
+	height: 26px !important;
+	justify-content: center !important;
+	width: 26px !important;
+}
+
+.instruction-text {
+	color: #EEEEEE !important;
+	font-size: 14px !important;
+	margin: 0 !important;
+	text-align: left !important;
+}
+
+	.instruction-text strong {
+		color: #85EA2D !important;
+		font-weight: 600 !important;
+	}
+
+.instruction-arrow {
+	color: #444444 !important;
+	font-size: 16px !important;
+	user-select: none !important;
+}
+
+/* ==========================================================================
+   ENDPOINT ROW AND CUSTOM PANEL UX/UI
+   ========================================================================== */
+.swagger-ui .opblock-tag {
+	border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+	color: #FFF !important;
+	font-size: 28px !important;
+	font-weight: 400 !important;
+	margin: 15px 0 5px 0 !important;
+}
+
+.swagger-ui .opblock-summary-control {
+	align-items: center !important;
+	display: flex !important;
+	width: 100% !important;
+}
+
+.swagger-ui .opblock-summary-path-description-wrapper {
+	align-items: center !important;
+	display: flex !important;
+	flex: 1 !important;
+	gap: 20px !important;
+	justify-content: space-between !important;
+	width: 100% !important;
+}
+
+.swagger-ui .opblock-summary-description {
+	margin-left: auto !important;
+	overflow: hidden !important;
+	text-align: right !important;
+	text-overflow: ellipsis !important;
+	white-space: nowrap !important;
+}
+
+.swagger-ui .opblock {
+	border-radius: 2px !important;
+	margin: 0 0 5px !important;
+	padding: 7px 15px !important;
+}
+
+	.swagger-ui .opblock .opblock-summary {
+		padding: 5px 0 10px !important;
+	}
+
+.swagger-ui .opblock-summary-method {
+	background-blend-mode: darken !important;
+	background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)) !important;
+	border-radius: 1px !important;
+	color: #FFF !important;
+	font-size: 15px !important;
+	font-weight: 500 !important;
+	margin-right: 10px !important;
+	padding: 15px 25px !important;
+	position: relative !important;
+	text-shadow: none !important;
+	width: 120px;
+}
+
+.swagger-ui .opblock-body pre.microlight {
+	background-color: #333 !important;
+	border-radius: 4px !important;
+	color: #FFF !important;
+	font-family: monospace !important;
+	font-size: 13px !important;
+	font-weight: 400 !important;
+	hyphens: auto !important;
+	margin: 10px 0 !important;
+	padding: 20px !important;
+	white-space: pre-wrap !important;
+}
+
+.language-json {
+	font-size: 13px !important;
+	font-weight: 400 !important;
+}
+
+.swagger-ui textarea {
+	border-radius: 1px !important;
+	color: #FFF !important;
+	font-family: monospace !important;
+	font-size: 14px !important;
+	font-weight: 400 !important;
+	min-height: 120px !important;
+	padding: 15px !important;
+}
+
+.custom-section .core-card {
+	background-color: #1E222B !important;
+	border: 1px solid #333333 !important;
+	box-sizing: border-box !important;
+	padding: 30px 30px 25px !important;
+}
+
+.custom-section .core-card-title {
+	border-bottom: 1px solid #818ba6 !important;
+	color: #DFDFDF !important;
+	cursor: default !important;
+	font-size: 26px !important;
+	font-weight: 400 !important;
+	margin: 0 0 40px 0 !important;
+	padding: 20px 0 !important;
+}
+
+.core-input-monospace {
+	background: #14171C !important;
+	border: 1px solid #444 !important;
+	border-radius: 2px !important;
+	color: #49CC90 !important;
+	font-family: monospace !important;
+	font-size: 14px !important;
+	flex: 1 !important;
+	min-width: 0 !important;
+	max-width: 360px !important;
+	outline: none !important;
+	padding: 25px 35px !important;
+	transition: border-color 0.5s;
+	width: 100% !important;
+}
+
+	.swagger-ui.custom-section .core-input-monospace:focus {
+		border-color: #49CC90 !important;
+	}
+
+.swagger-ui.custom-section .core-output-wrapper {
+	background: #14171C !important;
+	border: 1px solid #444 !important;
+	border-radius: 4px !important;
+	min-width: 40% !important;
+	padding: 14px 16px !important;
+	text-align: center !important;
+}
+
+.swagger-ui.custom-section .core-output-monospace {
+	font-family: monospace !important;
+	font-weight: 500 !important;
+	color: #49CC90 !important;
+	font-size: 14px !important;
+}
+
+.swagger-ui.custom-section .core-btn-premium {
+	background: #85EA2D !important;
+	color: #000000 !important;
+	border: none !important;
+	padding: 14px 30px;
+	font-family: 'Poppins', sans-serif !important;
+	font-weight: 600 !important;
+	border-radius: 4px;
+	cursor: pointer;
+	text-transform: uppercase;
+	font-size: 13px;
+	letter-spacing: 0.5px;
+	transition: background 0.2s, transform 0.1s;
+}
+
+.swagger-ui.custom-section .core-btn-premium:hover { background: #9EFF42 !important; }
+.swagger-ui.custom-section .core-btn-premium:active { transform: scale(0.98); }
+
+button#btnRunAudit {
+	border: none !important;
+	color: #000 !important;
+	font-family: 'Poppins', sans-serif !important;
+	font-size: 16px !important;
+	font-weight: 500 !important;
+	margin-bottom: 20px !important;
+	padding: 25px 45px !important;
+	transition: all 0.7s;
+}
+
+	button#btnRunAudit:hover {
+		background-color: #94E01A !important;
+		padding: 25px 45px !important;
+		font-family: 'Poppins', sans-serif !important;
+		font-size: 16px !important;
+		font-weight: 500 !important;
+		transition: all 0.7s;
+	}
+
+.swagger-ui.custom-section .core-audit-response {
+	display: none;
+	font-size: 14px;
+	flex: 1;
+	padding-left: 10px;
+	text-align: left;
+}
+
+.swagger-ui.custom-section .core-audit-message {
+	color: #85EA2D;
+	font-weight: 600;
+	margin: 30px 0 10px !important;
+	border: 1px solid #FF0000;
+	display: block !important;
+}
+
+	.core-audit-link {
+		color: #FFF !important;
+		margin-left: 30px !important;
+		transition: all 0.5s;
+	}
+
+		.core-audit-link:hover {
+			color: #85EA2D !important;
+			margin-left: 30px !important;
+		}
+
+.swagger-ui.custom-section .core-card-instruction {
+	color: #A0A0A0 !important;
+	font-size: 13px !important;
+	line-height: 1.5;
+	margin: 15px 0 0 0 !important;
+}
+
+	.swagger-ui.custom-section .core-card-instruction strong {
+		color: #DFDFDF !important;
+		font-weight: 600;
+	}
+
+.core-card-row {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	width: 100%;
+}
+
+.core-output-wrapper {
+	align-items: center;
+	display: flex;
+	white-space: nowrap;
+}
+
+.core-output-monospace {
+	font-family: monospace !important;
+}

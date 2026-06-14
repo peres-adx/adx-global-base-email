@@ -1,0 +1,199 @@
+:root {
+	--brand-success: #C5FF21;
+	--brand-error: #FF3B30;
+	--bg-card: #1A1A1E;
+	--text-muted: #8E8E93;
+	--border-color: #222;
+}
+
+body {
+	background: #121212;
+	color: #EEE;
+	padding: 40px 0;
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.stat-number {
+	display: block;
+	font-size: 3rem;
+	font-weight: 600;
+}
+
+.main-cards .card {
+	display: block !important;
+	margin-bottom: 15px;
+	padding: 40px 0;
+	background: var(--bg-card);
+	border: 1px solid var(--border-color);
+	border-radius: 6px;
+}
+
+	.main-cards .card h3 {
+		font-size: 18px;
+		margin: 0 0 10px 0 !important;
+		letter-spacing: 1px;
+	}
+
+.ux-guide-banner {
+	background: rgba(197, 255, 33, 0.03);
+	border: 1px solid rgba(197, 255, 33, 0.15);
+	border-radius: 6px;
+	padding: 20px;
+	margin: 25px 0;
+}
+
+	.ux-guide-banner h4 {
+		color: var(--brand-success);
+		font-size: 14px;
+		letter-spacing: 0.5px;
+		margin: 0 0 10px 0;
+		text-transform: uppercase;
+	}
+
+	.ux-guide-banner p {
+		margin: 0;
+		font-size: 13px;
+		color: #CCC;
+		line-height: 1.6;
+	}
+
+/* Filtros Dinâmicos */
+.dashboard-filters {
+	display: inline-flex;
+	background: #1A1A1E;
+	padding: 6px;
+	border-radius: 8px;
+	border: 1px solid #222;
+	gap: 8px;
+	margin-bottom: 25px;
+	width: 100%;
+}
+
+.filter-btn {
+	background: transparent;
+	border: none;
+	border: 1px solid transparent;
+	color: var(--text-muted);
+	padding: 10px 20px;
+	font-size: 13px;
+	font-weight: 600;
+	border-radius: 6px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+	color: #FFF;
+	background: rgba(255, 255, 255, 0.02);
+}
+
+.filter-btn.active {
+	background: #121212;
+	color: #FFF;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.filter-btn[data-filter="all"].active { border: 1px solid rgba(59, 23, 218, 0.3); }
+.filter-btn[data-filter="pass"].active { border: 1px solid rgba(197, 255, 33, 0.3); }
+.filter-btn[data-filter="fail"].active { border: 1px solid rgba(255, 59, 48, 0.3); }
+
+.badge-count {
+	font-size: 11px;
+	background: #2A2A30;
+	padding: 2px 6px;
+	border-radius: 4px;
+	color: #FFF;
+}
+.badge-count.btn-pass { color: var(--brand-success); }
+.badge-count.btn-fail { color: var(--brand-error); }
+
+/* Grid de Rows */
+.test-row {
+	align-items: center;
+	background: var(--bg-card);
+	border: 1px solid var(--border-color);
+	border-radius: 5px;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 15px;
+	padding: 20px 25px;
+}
+
+	.test-details {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+		width: 80%;
+	}
+
+		.test-title-wrapper {
+			align-items: center;
+			display: flex;
+			gap: 12px;
+			flex-wrap: wrap;
+		}
+
+		.test-title {
+			color: #FFF;
+			font-size: 16px;
+			font-weight: 600;
+		}
+
+.intent-badge {
+	border-radius: 3px;
+	font-size: 10px;
+	font-weight: 700;
+	letter-spacing: 0.5px;
+	padding: 2px 8px;
+	text-transform: uppercase;
+}
+
+	.intent-badge.success-type {
+		background: rgba(197, 255, 33, 0.1);
+		color: var(--brand-success);
+	}
+
+	.intent-badge.fail-type {
+		background: rgba(255, 59, 48, 0.1);
+		color: var(--brand-error);
+	}
+
+.test-guide { font-size: 13px; color: var(--text-muted); }
+.test-guide strong { color: #CCC; }
+
+.test-technical code {
+	color: #55555C !important;
+	font-family: monospace;
+	font-size: 12px;
+}
+
+.status-badge {
+	border-radius: 3px;
+	display: inline-block;
+	font-size: 13px;
+	font-weight: 700;
+	letter-spacing: 1px;
+	padding: 10px 30px;
+	text-transform: uppercase;
+}
+
+.pass { border: 1px solid var(--brand-success); color: var(--brand-success); }
+.fail { border: 1px solid var(--brand-error); color: var(--brand-error); }
+
+.failure-box {
+	margin-top: 8px;
+	color: #FF8580;
+	font-size: 12px;
+	font-family: monospace;
+	background: rgba(255,59,48,0.05);
+	padding: 8px;
+	border-radius: 4px;
+	border-left: 2px solid var(--brand-error);
+	white-space: pre-wrap;
+}
+
+.hide-by-filter { display: none !important; }
+section + section { border-top: 1px solid #222; margin-top: 40px; padding-top: 20px; }

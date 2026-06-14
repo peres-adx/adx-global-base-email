@@ -1,0 +1,8 @@
+.phpunit.result.cache
+*.log
+.vscode/
+
+api/.env
+
+api/writable/database/*.sqlite
+database/sqlite/*.sqlite

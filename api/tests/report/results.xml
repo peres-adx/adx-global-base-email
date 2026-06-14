@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="CLI Arguments" tests="24" assertions="55" errors="0" failures="2" skipped="0" time="0.404015">
+    <testsuite name="Tests\Unit\Domain\ValueObjects\CpfTest" file="D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\CpfTest.php" tests="4" assertions="10" errors="0" failures="0" skipped="0" time="0.026270">
+      <testcase name="testDeveAceitarCpfValidoComESemMascara" file="D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\CpfTest.php" line="16" class="Tests\Unit\Domain\ValueObjects\CpfTest" classname="Tests.Unit.Domain.ValueObjects.CpfTest" assertions="4" time="0.023364"/>
+      <testcase name="testDeveFalharComCpfMatematicamenteInvalido" file="D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\CpfTest.php" line="29" class="Tests\Unit\Domain\ValueObjects\CpfTest" classname="Tests.Unit.Domain.ValueObjects.CpfTest" assertions="2" time="0.001426"/>
+      <testcase name="testDeveFalharComCpfDeTamanhoErrado" file="D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\CpfTest.php" line="40" class="Tests\Unit\Domain\ValueObjects\CpfTest" classname="Tests.Unit.Domain.ValueObjects.CpfTest" assertions="2" time="0.000760"/>
+      <testcase name="testDeveFalharComCpfDeNumerosRepetidos" file="D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\CpfTest.php" line="51" class="Tests\Unit\Domain\ValueObjects\CpfTest" classname="Tests.Unit.Domain.ValueObjects.CpfTest" assertions="2" time="0.000721"/>
+    </testsuite>
+    <testsuite name="Tests\Unit\Domain\ValueObjects\EmailTest" file="D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\EmailTest.php" tests="7" assertions="16" errors="0" failures="0" skipped="0" time="0.007245">
+      <testsuite name="Tests\Unit\Domain\ValueObjects\EmailTest::testValidacaoDeEmail" tests="7" assertions="16" errors="0" failures="0" skipped="0" time="0.007245">
+        <testcase name="testValidacaoDeEmail with data set &quot;E-mail válido Hausti&quot;" file="D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\EmailTest.php" line="19" class="Tests\Unit\Domain\ValueObjects\EmailTest" classname="Tests.Unit.Domain.ValueObjects.EmailTest" assertions="3" time="0.002478"/>
+        <testcase name="testValidacaoDeEmail with data set &quot;E-mail com subdomínio&quot;" file="D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\EmailTest.php" line="19" class="Tests\Unit\Domain\ValueObjects\EmailTest" classname="Tests.Unit.Domain.ValueObjects.EmailTest" assertions="3" time="0.000878"/>
+        <testcase name="testValidacaoDeEmail with data set &quot;E-mail vazio&quot;" file="D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\EmailTest.php" line="19" class="Tests\Unit\Domain\ValueObjects\EmailTest" classname="Tests.Unit.Domain.ValueObjects.EmailTest" assertions="2" time="0.000804"/>
+        <testcase name="testValidacaoDeEmail with data set &quot;E-mail sem arroba&quot;" file="D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\EmailTest.php" line="19" class="Tests\Unit\Domain\ValueObjects\EmailTest" classname="Tests.Unit.Domain.ValueObjects.EmailTest" assertions="2" time="0.000793"/>
+        <testcase name="testValidacaoDeEmail with data set &quot;E-mail sem domínio&quot;" file="D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\EmailTest.php" line="19" class="Tests\Unit\Domain\ValueObjects\EmailTest" classname="Tests.Unit.Domain.ValueObjects.EmailTest" assertions="2" time="0.000765"/>
+        <testcase name="testValidacaoDeEmail with data set &quot;E-mail apenas espaços&quot;" file="D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\EmailTest.php" line="19" class="Tests\Unit\Domain\ValueObjects\EmailTest" classname="Tests.Unit.Domain.ValueObjects.EmailTest" assertions="2" time="0.000760"/>
+        <testcase name="testValidacaoDeEmail with data set &quot;E-mail inválido&quot;" file="D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\EmailTest.php" line="19" class="Tests\Unit\Domain\ValueObjects\EmailTest" classname="Tests.Unit.Domain.ValueObjects.EmailTest" assertions="2" time="0.000767"/>
+      </testsuite>
+    </testsuite>
+    <testsuite name="Tests\Unit\Domain\ValueObjects\MockFailureTest" file="D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\MockFailureTest.php" tests="2" assertions="2" errors="0" failures="2" skipped="0" time="0.012566">
+      <testcase name="testSimularFalhaDeValidacao" file="D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\MockFailureTest.php" line="13" class="Tests\Unit\Domain\ValueObjects\MockFailureTest" classname="Tests.Unit.Domain.ValueObjects.MockFailureTest" assertions="1" time="0.012161">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Unit\Domain\ValueObjects\MockFailureTest::testSimularFalhaDeValidacao&#13;
+A API retornou status de falha inesperado.
+Failed asserting that two strings are identical.
+--- Expected
++++ Actual
+@@ @@
+-'success'
++'failed'
+&#13;
+D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\MockFailureTest.php:17</failure>
+      </testcase>
+      <testcase name="testSimularErroCalculoDígito" file="D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\MockFailureTest.php" line="23" class="Tests\Unit\Domain\ValueObjects\MockFailureTest" classname="Tests.Unit.Domain.ValueObjects.MockFailureTest" assertions="1" time="0.000405">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Unit\Domain\ValueObjects\MockFailureTest::testSimularErroCalculoDígito&#13;
+O dígito verificador calculado matematicamente está incorreto.
+Failed asserting that 5 matches expected 9.
+&#13;
+D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\MockFailureTest.php:27</failure>
+      </testcase>
+    </testsuite>
+    <testsuite name="Tests\Unit\Domain\ValueObjects\PasswordTest" file="D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\PasswordTest.php" tests="5" assertions="11" errors="0" failures="0" skipped="0" time="0.337113">
+      <testsuite name="Tests\Unit\Domain\ValueObjects\PasswordTest::testValidacaoDeSenha" tests="3" assertions="7" errors="0" failures="0" skipped="0" time="0.335606">
+        <testcase name="testValidacaoDeSenha with data set &quot;Senha válida&quot;" file="D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\PasswordTest.php" line="15" class="Tests\Unit\Domain\ValueObjects\PasswordTest" classname="Tests.Unit.Domain.ValueObjects.PasswordTest" assertions="3" time="0.333853"/>
+        <testcase name="testValidacaoDeSenha with data set &quot;Senha vazia&quot;" file="D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\PasswordTest.php" line="15" class="Tests\Unit\Domain\ValueObjects\PasswordTest" classname="Tests.Unit.Domain.ValueObjects.PasswordTest" assertions="2" time="0.000968"/>
+        <testcase name="testValidacaoDeSenha with data set &quot;Senha curta&quot;" file="D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\PasswordTest.php" line="15" class="Tests\Unit\Domain\ValueObjects\PasswordTest" classname="Tests.Unit.Domain.ValueObjects.PasswordTest" assertions="2" time="0.000785"/>
+      </testsuite>
+      <testsuite name="Tests\Unit\Domain\ValueObjects\PasswordTest::testReconstituicaoDeHash" tests="2" assertions="4" errors="0" failures="0" skipped="0" time="0.001507">
+        <testcase name="testReconstituicaoDeHash with data set &quot;Hash válido&quot;" file="D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\PasswordTest.php" line="48" class="Tests\Unit\Domain\ValueObjects\PasswordTest" classname="Tests.Unit.Domain.ValueObjects.PasswordTest" assertions="2" time="0.000763"/>
+        <testcase name="testReconstituicaoDeHash with data set &quot;Hash vazio&quot;" file="D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\PasswordTest.php" line="48" class="Tests\Unit\Domain\ValueObjects\PasswordTest" classname="Tests.Unit.Domain.ValueObjects.PasswordTest" assertions="2" time="0.000744"/>
+      </testsuite>
+    </testsuite>
+    <testsuite name="Tests\Unit\Domain\ValueObjects\UuidTest" file="D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\UuidTest.php" tests="6" assertions="16" errors="0" failures="0" skipped="0" time="0.020821">
+      <testsuite name="Tests\Unit\Domain\ValueObjects\UuidTest::testValidacaoDeUuid" tests="4" assertions="10" errors="0" failures="0" skipped="0" time="0.003614">
+        <testcase name="testValidacaoDeUuid with data set &quot;UUID Válido Com Hifens&quot;" file="D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\UuidTest.php" line="19" class="Tests\Unit\Domain\ValueObjects\UuidTest" classname="Tests.Unit.Domain.ValueObjects.UuidTest" assertions="3" time="0.001233"/>
+        <testcase name="testValidacaoDeUuid with data set &quot;UUID Válido Sem Hifens&quot;" file="D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\UuidTest.php" line="19" class="Tests\Unit\Domain\ValueObjects\UuidTest" classname="Tests.Unit.Domain.ValueObjects.UuidTest" assertions="3" time="0.000854"/>
+        <testcase name="testValidacaoDeUuid with data set &quot;UUID Inválido Formato&quot;" file="D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\UuidTest.php" line="19" class="Tests\Unit\Domain\ValueObjects\UuidTest" classname="Tests.Unit.Domain.ValueObjects.UuidTest" assertions="2" time="0.000777"/>
+        <testcase name="testValidacaoDeUuid with data set &quot;UUID Vazio&quot;" file="D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\UuidTest.php" line="19" class="Tests\Unit\Domain\ValueObjects\UuidTest" classname="Tests.Unit.Domain.ValueObjects.UuidTest" assertions="2" time="0.000749"/>
+      </testsuite>
+      <testcase name="testGeracaoDinamicaDeUuid" file="D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\UuidTest.php" line="55" class="Tests\Unit\Domain\ValueObjects\UuidTest" classname="Tests.Unit.Domain.ValueObjects.UuidTest" assertions="3" time="0.016335"/>
+      <testcase name="testReconstituicaoDeBinario" file="D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\UuidTest.php" line="69" class="Tests\Unit\Domain\ValueObjects\UuidTest" classname="Tests.Unit.Domain.ValueObjects.UuidTest" assertions="3" time="0.000872"/>
+    </testsuite>
+  </testsuite>
+</testsuites>

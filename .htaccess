@@ -1,0 +1,4 @@
+Options -Indexes
+RewriteEngine On
+RewriteBase /adx-global-base/
+RewriteRule ^$ docs/ [L,R=301]

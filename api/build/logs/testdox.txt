@@ -1,0 +1,34 @@
+Cpf (Tests\Unit\Domain\ValueObjects\Cpf)
+ [x] Deve aceitar cpf valido com e sem mascara
+ [x] Deve falhar com cpf matematicamente invalido
+ [x] Deve falhar com cpf de tamanho errado
+ [x] Deve falhar com cpf de numeros repetidos
+
+Email (Tests\Unit\Domain\ValueObjects\Email)
+ [x] Validacao de email with data set "E-mail válido Hausti"
+ [x] Validacao de email with data set "E-mail com subdomínio"
+ [x] Validacao de email with data set "E-mail vazio"
+ [x] Validacao de email with data set "E-mail sem arroba"
+ [x] Validacao de email with data set "E-mail sem domínio"
+ [x] Validacao de email with data set "E-mail apenas espaços"
+ [x] Validacao de email with data set "E-mail inválido"
+
+Mock Failure (Tests\Unit\Domain\ValueObjects\MockFailure)
+ [ ] Simular falha de validacao
+ [ ] Simular erro calculo dígito
+
+Password (Tests\Unit\Domain\ValueObjects\Password)
+ [x] Validacao de senha with data set "Senha válida"
+ [x] Validacao de senha with data set "Senha vazia"
+ [x] Validacao de senha with data set "Senha curta"
+ [x] Reconstituicao de hash with data set "Hash válido"
+ [x] Reconstituicao de hash with data set "Hash vazio"
+
+Uuid (Tests\Unit\Domain\ValueObjects\Uuid)
+ [x] Validacao de uuid with data set "UUID Válido Com Hifens"
+ [x] Validacao de uuid with data set "UUID Válido Sem Hifens"
+ [x] Validacao de uuid with data set "UUID Inválido Formato"
+ [x] Validacao de uuid with data set "UUID Vazio"
+ [x] Geracao dinamica de uuid
+ [x] Reconstituicao de binario
+

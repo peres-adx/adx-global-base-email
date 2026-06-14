@@ -1,0 +1,521 @@
+/*
+*	simplePress.css — A Lite CSS Framework
+*	Architect: Rafael Peres
+*	Version: 2.6 (2026 Edition)
+*/
+
+:root {
+
+	/* alerts */
+	--alert-error: #DC3545;
+	--alert-overlay: rgba(0, 0, 0, 0.6);
+	--alert-warning: #FFC107;
+	--alert-error: #DC3545;
+	--alert-success: #28A745;
+
+	/* mixed */
+	--border-radius: 5px;
+	--button-hover: #333;
+	--card-bg: #FFF;
+	--card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	--container-max: 1440px;
+	--gutter: 20px;
+	--text-button-hover: #FFF;
+	--theme-bg: #FFF;
+	--theme-fields-bg: #FFF;
+
+	/* borders */
+	--theme-border-color: #CCC;
+	--theme-border-color-hover: #333;
+	--theme-border-color-focus: #666;
+	--theme-fields-border-radius: 5px;
+	--theme-placeholder: #666;
+	--theme-text: #333;
+
+	/* button-primary */
+	--theme-button-primary-bg: #333;
+	--theme-button-primary-border-color: #333;
+	--theme-button-primary-text: #FFF;
+	--theme-button-primary-bg-hover: #555;
+	--theme-button-primary-border-color-hover: #555;
+	--theme-button-primary-text-hover: #FFF;
+
+	/* button-secundary */
+	--theme-button-secondary-bg: #6C757D;
+	--theme-button-secondary-border-color: #6C757D;
+	--theme-button-secondary-text: #FFF;
+	--theme-button-secondary-bg-hover: #5A6268;
+	--theme-button-secondary-border-color-hover: #545b62;
+	--theme-button-secondary-text-hover: #FFF;
+
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+}
+
+.theme-dark {
+	--alert-overlay: rgba(0, 0, 0, 0.8);
+	--card-bg: #252525;
+	--card-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+	--theme-bg: #1A1A1A;
+	--theme-border-color: #444;
+	--theme-border-color-hover: #888;
+	--theme-border-color-focus: #FFF;
+	--theme-placeholder: #666;
+	--theme-text: #EEE;
+
+	/* button-primary styles*/
+	--theme-button-primary-bg: #EEE;
+	--theme-button-primary-border-color: #EEE;
+	--theme-button-primary-text: #1A1A1A;
+	--theme-button-primary-bg-hover: #FFF;
+	--theme-button-primary-border-color-hover: #FFF;
+	--theme-button-primary-text-hover: #000;
+
+	/* button-secundary styles*/
+	--theme-button-secondary-bg: #6C757D;
+	--theme-button-secondary-border-color: #6C757D;
+	--theme-button-secondary-text: #FFF;
+	--theme-button-secondary-bg-hover: #5A6268;
+	--theme-button-secondary-border-color-hover: #545b62;
+	--theme-button-secondary-text-hover: #FFF;
+}
+
+* { box-sizing: border-box; }
+
+/* Visual Switch Styling */
+.switch {
+	background-color: #CCC;
+	border-radius: 20px;
+	cursor: pointer;
+	display: inline-block;
+	height: 24px;
+	position: relative;
+	transition: 0.4s;
+	width: 50px;
+}
+
+	.switch::before {
+		background-color: #FFF;
+		border-radius: 50%;
+		bottom: 4px;
+		content: '';
+		height: 16px;
+		left: 4px;
+		position: absolute;
+		transition: 0.4s;
+		width: 16px;
+	}
+
+/* Dark mode switch 'hack' */
+#dark-mode-check {
+	display: none;
+}
+
+	/* When the checkbox is checked, the following container turns dark */
+	#dark-mode-check:checked ~ .theme-wrapper {
+		--alert-overlay: rgba(0, 0, 0, 0.8);
+		--card-bg: #252525;
+		--card-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+		--theme-bg: #1A1A1A;
+		--theme-border-color: #444;
+		--theme-border-color-hover: #888;
+		--theme-placeholder: #666;
+		--theme-text: #EEE;
+		background-color: var(--theme-bg);
+		color: var(--theme-text);
+	}
+
+	#dark-mode-check:checked ~ .theme-wrapper .tab-nav {
+		border-bottom-color: var(--theme-border-color);
+	}
+
+	#dark-mode-check:checked ~ .theme-wrapper .tab-label {
+		color: var(--theme-placeholder);
+	}
+
+#dark-mode-check:checked ~ .theme-wrapper #tab-1:checked ~ .tab-nav label[for="tab-1"],
+#dark-mode-check:checked ~ .theme-wrapper #tab-2:checked ~ .tab-nav label[for="tab-2"],
+#dark-mode-check:checked ~ .theme-wrapper #tab-3:checked ~ .tab-nav label[for="tab-3"] {
+	color: var(--theme-button-primary-bg);
+	border-bottom-color: var(--theme-button-primary-bg);
+}
+
+	#dark-mode-check:checked ~ .theme-wrapper .switch {
+		background-color: var(--button-hover);
+	}
+
+	#dark-mode-check:checked ~ .theme-wrapper .switch::before {
+		transform: translateX(26px);
+	}
+
+.tab-state { display: none; }
+
+.tab-nav {
+	display: flex;
+	border-bottom: 2px solid var(--theme-border-color);
+	gap: 10px;
+}
+
+.tab-label {
+	padding: 15px 25px;
+	cursor: pointer;
+	transition: all 0.3s;
+	border-bottom: 2px solid transparent;
+	margin-bottom: -2px;
+}
+
+/* Identificando Tab Ativa */
+#tab-1:checked ~ .tab-nav label[for="tab-1"],
+#tab-2:checked ~ .tab-nav label[for="tab-2"],
+#tab-3:checked ~ .tab-nav label[for="tab-3"] {
+	border-bottom-color: var(--theme-button-primary-bg);
+	font-weight: bold;
+	color: var(--theme-button-primary-bg);
+}
+
+.tab-content-wrapper {
+	position: relative;
+	margin-top: 20px;
+	min-height: 150px;
+}
+
+.tab-panel {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	opacity: 0;
+	transform: translateY(20px);
+	visibility: hidden;
+	transition: all 0.7s ease;
+}
+
+/* Transição de entrada */
+#tab-1:checked ~ .tab-content-wrapper #content-1,
+#tab-2:checked ~ .tab-content-wrapper #content-2,
+#tab-3:checked ~ .tab-content-wrapper #content-3 {
+	opacity: 1;
+	transform: translateY(0);
+	visibility: visible;
+}
+
+/* Grid Core */
+.container-fluid, .container {
+	margin: 0 auto;
+	padding: 0 var(--gutter);
+	width: 100%;
+}
+
+.container { max-width: var(--container-max); }
+
+.row {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0 calc(var(--gutter) * -1);
+}
+
+.row > * {
+	flex-shrink: 0;
+	max-width: 100%;
+	padding: 0 var(--gutter);
+	width: 100%;
+}
+
+/* Base Columns (Mobile First) */
+.col			{ flex: 1 0 0%; }
+.col-auto	{ flex: 0 0 auto; width: auto; }
+
+/* Column width reference */
+.col-1  { width: 8.333333%; }
+.col-2  { width: 16.666667%; }
+.col-3  { width: 25%; }
+.col-4  { width: 33.333333%; }
+.col-5  { width: 41.666667%; }
+.col-6  { width: 50%; }
+.col-7  { width: 58.333333%; }
+.col-8  { width: 66.666667%; }
+.col-9  { width: 75%; }
+.col-10 { width: 83.333333%; }
+.col-11 { width: 91.666667%; }
+.col-12 { width: 100%; }
+
+/* Responsive Breakpoints */
+@media (min-width: 576px) {
+	.container	{ max-width: 540px; }
+	.col-sm-1		{ width: 8.333333%; }
+	.col-sm-2		{ width: 16.666667%; }
+	.col-sm-3		{ width: 25%; }
+	.col-sm-4		{ width: 33.333333%; }
+	.col-sm-5		{ width: 41.666667%; }
+	.col-sm-6		{ width: 50%; }
+	.col-sm-7		{ width: 58.333333%; }
+	.col-sm-8		{ width: 66.666667%; }
+	.col-sm-9		{ width: 75%; }
+	.col-sm-10	{ width: 83.333333%; }
+	.col-sm-11	{ width: 91.666667%; }
+	.col-sm-12	{ width: 100%; }
+}
+
+@media (min-width: 768px) {
+	.container	{ max-width: 720px; }
+	.col-md-1		{ width: 8.333333%; }
+	.col-md-2		{ width: 16.666667%; }
+	.col-md-3		{ width: 25%; }
+	.col-md-4		{ width: 33.333333%; }
+	.col-md-5		{ width: 41.666667%; }
+	.col-md-6		{ width: 50%; }
+	.col-md-7		{ width: 58.333333%; }
+	.col-md-8		{ width: 66.666667%; }
+	.col-md-9		{ width: 75%; }
+	.col-md-10	{ width: 83.333333%; }
+	.col-md-11	{ width: 91.666667%; }
+	.col-md-12	{ width: 100%; }
+}
+
+@media (min-width: 992px) {
+	.container	{ max-width: 960px; }
+	.col-lg-1		{ width: 8.333333%; }
+	.col-lg-2		{ width: 16.666667%; }
+	.col-lg-3		{ width: 25%; }
+	.col-lg-4		{ width: 33.333333%; }
+	.col-lg-5		{ width: 41.666667%; }
+	.col-lg-6		{ width: 50%; }
+	.col-lg-7		{ width: 58.333333%; }
+	.col-lg-8		{ width: 66.666667%; }
+	.col-lg-9		{ width: 75%; }
+	.col-lg-10	{ width: 83.333333%; }
+	.col-lg-11	{ width: 91.666667%; }
+	.col-lg-12	{ width: 100%; }
+}
+
+@media (min-width: 1200px) {
+	.container	{ max-width: 1140px; }
+	.col-xl-1		{ width: 8.333333%; }
+	.col-xl-2		{ width: 16.666667%; }
+	.col-xl-3		{ width: 25%; }
+	.col-xl-4		{ width: 33.333333%; }
+	.col-xl-5		{ width: 41.666667%; }
+	.col-xl-6		{ width: 50%; }
+	.col-xl-7		{ width: 58.333333%; }
+	.col-xl-8		{ width: 66.666667%; }
+	.col-xl-9		{ width: 75%; }
+	.col-xl-10	{ width: 83.333333%; }
+	.col-xl-11	{ width: 91.666667%; }
+	.col-xl-12	{ width: 100%; }
+}
+
+@media (min-width: 1400px) {
+	.container	{ max-width: var(--container-max); }
+	.col-xxl-1	{ width: 8.333333%; }
+	.col-xxl-2	{ width: 16.666667%; }
+	.col-xxl-3	{ width: 25%; }
+	.col-xxl-4	{ width: 33.333333%; }
+	.col-xxl-5	{ width: 41.666667%; }
+	.col-xxl-6	{ width: 50%; }
+	.col-xxl-7	{ width: 58.333333%; }
+	.col-xxl-8	{ width: 66.666667%; }
+	.col-xxl-9	{ width: 75%; }
+	.col-xxl-10	{ width: 83.333333%; }
+	.col-xxl-11	{ width: 91.666667%; }
+	.col-xxl-12	{ width: 100%; }
+}
+
+/* Utilities */
+.mt-20				{ margin-top: 20px; }
+.pt-20				{ padding-top: 20px; }
+.text-center	{ text-align: center; }
+.text-left		{ text-align: left; }
+.text-right		{ text-align: right; }
+.text-upper		{ text-transform: uppercase; }
+
+/* Component: Card */
+.card {
+	background-color: var(--card-bg);
+	border-radius: var(--border-radius);
+	box-shadow: var(--card-shadow);
+	color: var(--theme-text);
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	padding: 20px;
+}
+
+/* Component: Alert (Checkbox Hack) */
+.alert-state {
+	display: none;
+}
+
+.alert-overlay {
+	align-items: center;
+	background-color: var(--alert-overlay);
+	display: flex;
+	height: 100%;
+	justify-content: center;
+	left: 0;
+	opacity: 0;
+	position: fixed;
+	top: 0;
+	transition: opacity 0.5s ease, visibility 0.5s;
+	visibility: hidden;
+	width: 100%;
+	z-index: 9999;
+}
+
+	/* Checkbox Hack Trigger with Transition */
+	.alert-state:checked + .alert-overlay {
+		opacity: 1;
+		visibility: visible;
+	}
+
+.alert-modal {
+	background-color: var(--card-bg);
+	border-radius: var(--border-radius);
+	max-width: 450px;
+	padding: 40px;
+	text-align: center;
+	width: 90%;
+	transform: translateY(20px);
+	transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+	/* Modal slides up when opened */
+	.alert-state:checked + .alert-overlay .alert-modal {
+		transform: translateY(0);
+	}
+
+.alert-icon {
+	width: 80px;
+	height: 80px;
+	border: 3px solid;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 auto 20px;
+	font-weight: bold;
+}
+
+	.alert-icon span {
+		font-size: 40px;
+	}
+
+	/* Modificadores de Estado baseados nas suas variáveis */
+	.alert-icon.alert-success {
+		border-color: var(--alert-success);
+		color: var(--alert-success);
+	}
+
+	.alert-icon.alert-warning {
+		border-color: var(--alert-warning);
+		color: var(--alert-warning);
+	}
+
+	.alert-icon.alert-error {
+		border-color: var(--alert-error);
+		color: var(--alert-error);
+	}
+
+/* Form & Input */
+input, select {
+	background-color: var(--theme-fields-bg);
+	border: 1px solid var(--theme-border-color);
+	border-radius: var(--theme-fields-border-radius);
+	color: var(--theme-placeholder);
+	outline: none;
+	padding: 18px 12px;
+	transition: border-color 1s ease;
+	width: 100%;
+}
+
+	input:hover, select:hover {
+		border-color: var(--theme-border-color-hover);
+	}
+
+	input:focus, select:focus {
+		border-color: var(--theme-border-color-focus);
+	}
+
+.button {
+	border: 1px solid transparent;
+	border-radius: var(--border-radius);
+	cursor: pointer;
+	display: inline-block;
+	font-size: 15px;
+	font-weight: 500;
+	padding: 20px;
+	text-align: center;
+	transition: all 1s;
+	user-select: none;
+	vertical-align: middle;
+	width: 100%;
+}
+
+	.button:hover {
+		background-color: var(--button-hover);
+		color: var(--text-button-hover);
+	}
+
+/* Primary Button Style */
+.button-primary {
+	background-color: var(--theme-button-primary-bg);
+	border-color: var(--theme-button-primary-border-color);
+	color: var(--theme-button-primary-text);
+}
+
+	.button-primary:hover {
+		background-color: var(--theme-button-primary-bg-hover);
+		border-color: var(--theme-button-primary-border-color-hover);
+		color: var(--theme-button-primary-text-hover);
+	}
+
+/* Secundary Button Style */
+.button-secundary {
+	background-color: var(--theme-button-secondary-bg-bg);
+	border-color: var(--theme-button-secundary-border-color);
+	color: var(--theme-button-secundary-text);
+}
+
+	.button-secundary:hover {
+		background-color: var(--theme-button-secundary-bg-hover);
+		border-color: var(--theme-button-secundary-border-color-hover);
+		color: var(--theme-button-secundary-text-hover);
+	}
+
+
+	.code-example {
+	position: relative;
+	border: 1px solid var(--theme-border-color);
+	padding: 40px 20px 20px;
+	border-radius: var(--border-radius);
+	margin-top: 20px;
+}
+
+.copy-btn {
+	position: absolute;
+	top: 5px;
+	right: 10px;
+	background: none;
+	border: none;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 12px;
+	color: var(--theme-placeholder);
+	transition: color 0.3s;
+}
+
+.copy-btn:hover {
+	color: var(--theme-text);
+}
+
+.copy-btn svg {
+	opacity: 0.7;
+}

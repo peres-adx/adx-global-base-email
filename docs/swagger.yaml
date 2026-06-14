@@ -1,0 +1,328 @@
+openapi: 3.0.0
+info:
+  title: ADX GLOBAL BASE - API RESTful
+  description: >
+    Custom Swagger - Por Rafael Peres.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080/adx-global-base/api
+    variables:
+      database:
+        default: "SELECIONE O BANCO DE DADOS"
+        enum:
+          - "SELECIONE O BANCO DE DADOS"
+          - "SQL Server"
+          - "MySQL"
+          - "SQLite"
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type:              http
+      scheme:            bearer
+      bearerFormat:      JWT
+
+  schemas:
+    User:
+      type:               object
+      required:           [name, email, password]
+      properties:
+        name:             { type: string, example: "Rafael Peres" }
+        email:            { type: string, example: "rafapress@yahoo.com" }
+        password:         { type: string, example: "123456" }
+        cpf:              { type: string, example: "30786708808" }
+        rg:               { type: string, example: "42.031.782-2" }
+        phone:            { type: string, example: "19999299014" }
+        address:          { type: string, example: "Rua dos Carneiros" }
+        zipcode:          { type: string, example: "13.271-605" }
+        number:           { type: number, example: 18 }
+        district:         { type: string, example: "Paiquerê" }
+        city:             { type: string, example: "Valinhos" }
+        fu:               { type: string, example: "SP" }
+
+    Customer:
+      type:               object
+      required:           [userId, name, email, cpf]
+      properties:
+        userId:           { type: string, example: "78EDBBC5F55946B299C624C5BFB612DF" }
+        name:             { type: string, example: "Ricardo Cruz" }
+        email:            { type: string, example: "ricruz@gmail.com" }
+        cpf:              { type: string, example: "31014331420" }
+        rg:               { type: string, example: "12.555.782-8" }
+        age:              { type: number, example: 30 }
+        phone:            { type: string, example: "19999299014" }
+        address:          { type: string, example: "Rua dos Sabiás" }
+        zipcode:          { type: string, example: "13.271-650" }
+        number:           { type: number, example: 280 }
+        district:         { type: string, example: "Centro" }
+        city:             { type: string, example: "Valinhos" }
+        fu:               { type: string, example: "SP" }
+
+    Order:
+      type:               object
+      required:           [customerId, description, totalValue, status]
+      properties:
+        customerId:       { type: string, example: "C61BE94913A545BF9F28B596D12973D2" }
+        description:      { type: string, example: "Laptop Dell Inspiron" }
+        totalValue:       { type: number, example: 1500.00 }
+        status:           { type: string, example: "pending" }
+
+    AuditResponse:
+      type:               object
+      required:           [status, detail, report_url]
+      properties:
+        status:
+          type:           string
+          example:        "success"
+        detail:
+          type:           string
+          example:        "Documento de Auditoria criado com sucesso."
+        report_url:
+          type:           string
+          example:        "/{project-root}/tests/report/"
+
+paths:
+  /api/setup/master:
+    post:
+      tags:               [Auth]
+      summary:            "Disaster Recovery: Restaurar Usuário Master"
+      requestBody:
+        required:         true
+        content:
+          application/json:
+            schema:
+              type:       object
+              required:   [secret]
+              properties:
+                secret:   { type: string, example: "ADX_MASTER_RECOVERY_2026" }
+      responses:
+        '201':            { description: "Criado" }
+        '401':            { description: "Não autorizado" }
+
+  /login:
+    post:
+      tags:               [Auth]
+      summary:            "Realizar Login"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type:       object
+              properties:
+                email:    { type: string, example: "master@adx-global-base.com" }
+                password: { type: string, example: "123456" }
+      responses:
+        '200':
+          description:    "OK"
+          content:
+            application/json:
+              example:    { status: 200, data: { token: "JWT_TOKEN" } }
+
+  /api/users:
+    get:
+      tags:           [Users]
+      summary:        "Listar todos os usuários"
+      security:       [{ bearerAuth: [] }]
+      responses:      { '200': { description: "OK" } }
+    post:
+      tags:           [Users]
+      summary:        "Cadastrar usuário"
+      security:       [{ bearerAuth: [] }]
+      requestBody:
+        content:
+          application/json:
+            schema:   { $ref: '#/components/schemas/User' }
+      responses:      { '201': { description: "Criado" } }
+
+  /api/users/{id}:
+    get:
+      tags:           [Users]
+      summary:        "Filtrar usuário por ID"
+      security:       [{ bearerAuth: [] }]
+      parameters:
+        - name:       id
+          in:         path
+          required:   true
+          schema:     { type: string }
+      responses:      { '200': { description: "OK" } }
+    put:
+      tags:           [Users]
+      summary:        "Alterar dados do Usuário"
+      security:       [{ bearerAuth: [] }]
+      parameters:
+        - name:       id
+          in:         path
+          required:   true
+          schema:     { type: string }
+      requestBody:
+        content:
+          application/json:
+            schema:   { $ref: '#/components/schemas/User' }
+      responses:      { '200': { description: "Atualizado" } }
+    delete:
+      tags:           [Users]
+      summary:        "Remover usuário"
+      security:       [{ bearerAuth: [] }]
+      parameters:
+        - name:       id
+          in:         path
+          required:   true
+          schema:     { type: string }
+      responses:      { '200': { description: "Excluído" } }
+
+  /api/customers:
+    get:
+      tags:           [Customers]
+      summary:        "Listar todos os clientes"
+      security:       [{ bearerAuth: [] }]
+      responses:      { '200': { description: "OK" } }
+    post:
+      tags:           [Customers]
+      summary:        "Cadastrar cliente"
+      security:       [{ bearerAuth: [] }]
+      requestBody:
+        content:
+          application/json:
+            schema:   { $ref: '#/components/schemas/Customer' }
+      responses:      { '201': { description: "Criado" } }
+
+  /api/customers/{id}:
+    get:
+      tags:           [Customers]
+      summary:        "Filtrar por Customer ID"
+      security:       [{ bearerAuth: [] }]
+      parameters:
+        - name:       id
+          in:         path
+          required:   true
+          schema:     { type: string }
+      responses:      { '200': { description: "OK" } }
+    put:
+      tags:           [Customers]
+      summary:        "Alterar dados do cliente"
+      security:       [{ bearerAuth: [] }]
+      parameters:
+        - name:       id
+          in:         path
+          required:   true
+          schema:     { type: string }
+      requestBody:
+        content:
+          application/json:
+            schema:   { $ref: '#/components/schemas/Customer' }
+      responses:      { '200': { description: "Atualizado" } }
+    delete:
+      tags:           [Customers]
+      summary:        "Remover cliente"
+      security:       [{ bearerAuth: [] }]
+      parameters:
+        - name:       id
+          in:         path
+          required:   true
+          schema:     { type: string }
+      responses:      { '200': { description: "Excluído" } }
+
+  /api/customers/user/{userId}:
+    get:
+      tags:           [Customers]
+      summary:        "Listar clientes por Usuário"
+      security:       [{ bearerAuth: [] }]
+      parameters:
+        - name:       userId
+          in:         path
+          required:   true
+          schema:     { type: string }
+      responses:      { '200': { description: "OK" } }
+
+  /api/orders:
+    get:
+      tags:           [Orders]
+      summary:        "Listar todos os pedidos"
+      security:       [{ bearerAuth: [] }]
+      responses:      { '200': { description: "OK" } }
+    post:
+      tags:           [Orders]
+      summary:        "Criar novo pedido"
+      security:       [{ bearerAuth: [] }]
+      requestBody:
+        content:
+          application/json:
+            schema:   { $ref: '#/components/schemas/Order' }
+      responses:      { '201': { description: "Criado" } }
+
+  /api/orders/{id}:
+    get:
+      tags:           [Orders]
+      summary:        "Filtrar pedido por ID"
+      security:       [{ bearerAuth: [] }]
+      parameters:
+        - name:       id
+          in:         path
+          required:   true
+          schema:     { type: string }
+      responses:      { '200': { description: "OK" } }
+    put:
+      tags:           [Orders]
+      summary:        "Alterar status ou dados do pedido"
+      security:       [{ bearerAuth: [] }]
+      parameters:
+        - name:       id
+          in:         path
+          required:   true
+          schema:     { type: string }
+      requestBody:
+        content:
+          application/json:
+            schema:   { $ref: '#/components/schemas/Order' }
+      responses:      { '200': { description: "Atualizado" } }
+    delete:
+      tags:           [Orders]
+      summary:        "Cancelar/Excluir pedido"
+      security:       [{ bearerAuth: [] }]
+      parameters:
+        - name:       id
+          in:         path
+          required:   true
+          schema:     { type: string }
+      responses:      { '200': { description: "Cancelado" } }
+
+  /api/orders/customer/{customerId}:
+    get:
+      tags:           [Orders]
+      summary:        "Listar pedidos por Cliente"
+      security:       [{ bearerAuth: [] }]
+      parameters:
+        - name:       customerId
+          in:         path
+          required:   true
+          schema:     { type: string }
+      responses:      { '200': { description: "OK" } }
+
+  /tests/audit:
+    get:
+      tags:           [ Auditoria / TDD ]
+      summary:        "Gerar Documento de Auditoria (TDDash)"
+      description:    "Dispara o PHPUnit em background e compila o relatório estático de testes unitários."
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditResponse'
+
+  /api/status:
+    get:
+      tags:           [ Infraestrutura ]
+      summary:        "Checar status e dependências da API"
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              example:
+                status: "success"
+                detail: "API operando normalmente."
+                database: "SQL Server"
+                environment: "development"
