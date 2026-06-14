@@ -6,3 +6,5 @@ api/.env
 
 api/writable/database/*.sqlite
 database/sqlite/*.sqlite
+
+preview.png
