@@ -1,0 +1,7 @@
+.phpunit.result.cache
+*.log
+.vscode/
+
+api/.env
+
+preview.png

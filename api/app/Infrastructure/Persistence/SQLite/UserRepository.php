@@ -122,7 +122,7 @@ class UserRepository implements IUserRepository
 
 	}
 
-	public function exists(Email $email, Cpf $cpf, ?Uuid $excludeId = null): bool
+	public function exists(Email $email, ?Cpf $cpf, ?Uuid $excludeId = null): bool
 	{
 
 		$builder = $this->db->table($this->table);

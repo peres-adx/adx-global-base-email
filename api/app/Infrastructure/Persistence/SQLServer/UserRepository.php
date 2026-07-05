@@ -11,8 +11,8 @@ use CodeIgniter\Database\BaseConnection;
 class UserRepository implements IUserRepository
 {
 
-	private string $table      = 'users';
-	private string $baseSelect  = 'CONVERT(VARCHAR(32), id, 2) as id, name, email, cpf, rg, phone, address, zipcode, number, district, city, fu';
+	private string $table				= 'users';
+	private string $baseSelect	= 'CONVERT(VARCHAR(32), id, 2) as id, name, email, cpf, rg, phone, address, zipcode, number, district, city, fu';
 
 	public function __construct(private readonly BaseConnection $db) {}
 
@@ -122,18 +122,19 @@ class UserRepository implements IUserRepository
 
 	}
 
-	public function exists(Email $email, Cpf $cpf, ?Uuid $excludeId = null): bool
+	public function exists(Email $email, ?Cpf $cpf, ?Uuid $excludeId = null): bool
 	{
 
 		$builder = $this->db->table($this->table);
 
 		if ($excludeId) $builder->where('id !=', "CONVERT(BINARY(16), '0x{$excludeId}', 1)", false);
 
+		$identifiers = array_filter([ 'email' => (string) $email, 'cpf'   => $cpf ? (string) $cpf : null ]);
+
 		return $builder->groupStart()
-											 ->where('email', (string) $email)
-											 ->orWhere('cpf', (string) $cpf)
-										 ->groupEnd()
-										 ->countAllResults() > 0;
+						   ->orWhere($identifiers)
+					   ->groupEnd()
+					   ->countAllResults() > 0;
 
 	}
 

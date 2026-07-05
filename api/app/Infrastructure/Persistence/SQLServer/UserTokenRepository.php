@@ -2,7 +2,8 @@
 
 namespace App\Infrastructure\Persistence\SQLServer;
 
-use App\Domain\Repositories\Users\IUserTokenRepository; 
+use App\Domain\Repositories\Users\IUserTokenRepository;
+
 use CodeIgniter\Database\BaseConnection;
 
 class UserTokenRepository implements IUserTokenRepository
@@ -12,18 +13,20 @@ class UserTokenRepository implements IUserTokenRepository
 
 	public function __construct(private readonly BaseConnection $db) {}
 
-	public function saveInvite(string $userId, string $token): bool
+	public function saveInvite(string $userId, string $token, int $version = 1): bool
 	{
 
-		$sql = "INSERT INTO {$this->table} (id, user_id, token, expires_at) 
-						VALUES (
-							CONVERT(BINARY(16), '0x' + REPLACE(?, '-', ''), 1), 
-							CONVERT(BINARY(16), '0x' + REPLACE(?, '-', ''), 1), 
-							?, 
-							?
-						)";
+		$tokenId = bin2hex(random_bytes(16));
 
-		return $this->db->query($sql, [ $userId, $userId, $token, date('Y-m-d H:i:s', strtotime('+24 hours')) ]);
+		return $this->db->table($this->table)
+										->set('id', "CONVERT(BINARY(16), '0x{$tokenId}', 1)", false)
+										->set('user_id', "CONVERT(BINARY(16), '0x{$userId}', 1)", false)
+										->set([
+											'token'      => $token,
+											'version'    => $version,
+											'expires_at' => date('Y-m-d H:i:s', strtotime('+24 hours'))
+										])
+										->insert();
 
 	}
 
@@ -31,26 +34,22 @@ class UserTokenRepository implements IUserTokenRepository
 	{
 
 		$row = $this->db->table($this->table)
-										->select("CONVERT(VARCHAR(32), user_id, 2) as userId, expires_at")
+										->select("CONVERT(VARCHAR(32), user_id, 2) as userId, version, expires_at")
 										->where('token', $token)
 										->where('used_at', null)
 										->get()
-										->getRow();
+										->getRowArray();
 
-		if (!$row) return null;
-
-		return (object) [
-			'userId'    => $row->userId,
-			'isExpired' => strtotime($row->expires_at) < time()
-		];
+		return $row
+			? (object) [
+				'userId'    => $row['userId'],
+				'version'   => (int) $row['version'],
+				'isExpired' => strtotime($row['expires_at']) < time()
+			]
+			: null;
 
 	}
 
-	public function markAsUsed(string $token): bool 
-	{ 
-		return $this->db->table($this->table)
-										->where('token', $token)
-										->update(['used_at' => date('Y-m-d H:i:s')]); 
-	}
+	public function markAsUsed(string $token): bool { return $this->db->table($this->table)->where('token', $token)->update(['used_at' => date('Y-m-d H:i:s')]); }
 
 }

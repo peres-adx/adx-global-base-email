@@ -13,9 +13,7 @@ use Config\Services;
 class OrderService
 {
 
-  public function __construct(
-		private readonly IOrderRepository $repository
-	) {}
+  public function __construct(private readonly IOrderRepository $repository) {}
 
 	public function listAll(): Result
 	{

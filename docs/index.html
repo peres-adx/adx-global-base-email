@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 	<meta charset="UTF-8">
-	<title>Swagger UI</title>
+	<title>ADX Custom Swagger</title>
 	<link rel="icon" type="image/png" href="./assets/images/favicon-32x32.png" sizes="32x32" />
 	<link rel="icon" type="image/png" href="./assets/images/favicon-16x16.png" sizes="16x16" />
 	<link rel="stylesheet" type="text/css" href="./assets/styles/swagger-ui.css" />
@@ -10,67 +10,118 @@
 </head>
 <body>
 
+	<!-- DIV PADRÃO DO SWAGGER, ONDE TUDO É CRIADO EM TEMPO DE EXECUÇÃO -->
+
 	<div id="swagger-ui"></div>
 
 	<div class="swagger-ui">
 
-		<div class="information-container wrapper core-panel-container">
+		<!-- SECTION DO WELCOME -->
 
-			<section class="block col-12 core-panel-wrapper">
+		<section class="core-ui-section core-ui-block border-top-primary core-welcome-screen">
 
-				<div class="core-card card-bin-hex custom-section border-top-primary">
-					<h3 class="opblock-tag no-desc core-card-title">
-						<span>Convert Bin to Hex</span>
-					</h3>
-					<div class="core-card-row">
-						<input type="text" id="binInput" class="core-input-monospace" placeholder="Cole o Binary do Banco (0x...)">
-						<div class="core-output-wrapper">
-							<span id="hexOutput" class="core-output-monospace">INFORME O CÓDIGO BIN NO CAMPO AO LADO</span>
-						</div>
-					</div>
-					<p class="core-card-instruction">
-						<strong>INSTRUÇÕES:</strong> Remova hífens e prefixos 0x automaticamente para usar nos filtros da API.
-					</p>
-				</div>
+			<div class="core-ui-badge badge-danger">DEFINIÇÃO DO BANCO DE DADOS</div>
+			<h2 class="core-ui-title">Ambiente de Engenharia</h2>
 
-				<div class="core-card card-tddash custom-section border-top-primary">
-					<h3 class="opblock-tag no-desc core-card-title">
-						<span class="text-green-identity">Auditoria de Qualidade (TDDash)</span>
-					</h3>
-					<div class="core-card-row">
-						<button id="btnRunAudit" class="core-btn-premium">Gerar Documento de Auditoria</button>
-						<div id="auditResponseArea" class="core-audit-response">
-							<span id="auditMessage" class="core-audit-message"></span>
-						</div>
-					</div>
-					<p class="core-card-instruction">
-						<strong>PIPELINE:</strong> Dispara o PHPUnit em tempo real no servidor local, valida os VOs e reconstrói o report HTML.
-					</p>
-				</div>
-
-			</section>
-		</div>
-	</div>
-
-	<div class="swagger-ui core-welcome-screen core-display-block">
-		<div class="wrapper welcome-container">
-			<div class="welcome-card custom-section border-top-primary">
-				<div class="welcome-badge">DATABASE REQUIRED</div>
-				<h2 class="welcome-title">Ambiente de Engenharia</h2>
-				<p class="welcome-subtitle text-center">
-					Este ecossistema opera em modo agnóstico de persistência, bastando selecionar um Banco de Dados:<br />
-					<strong>SQL Server &bull; MySQL &bull; SQLite</strong><br />
-					Para liberar todos os endpoints mapeados, o esquema de dados e as chaves de autorização da <strong>API</strong>, siga os passos abaixo:
-				</p>
-				<div class="welcome-instruction-box">
-					<span class="instruction-step">1</span>
-					<p class="instruction-text">Vá até o topo da página no bloco de servidores do contrato.</p>
-					<span class="instruction-arrow">➔</span>
-					<span class="instruction-step">2</span>
-					<p class="instruction-text">Selecione uma <strong>Engine de Banco de Dados</strong> ativa para abrir o escopo.</p>
-				</div>
+			<p class="core-ui-subtitle">
+				Este ecossistema opera em modo agnóstico de persistência, bastando selecionar um Banco de Dados:<br />
+				<strong>SQL Server &bull; MySQL &bull; SQLite</strong><br />
+				Para liberar todos os endpoints mapeados, o esquema de dados e as chaves de autorização da <strong>API</strong>, siga os passos abaixo:
+			</p>
+			<div class="core-ui-instruction-box">
+				<span class="instruction-step">1</span>
+				<p class="instruction-text">Vá até o topo da página e utilize o DropDown para selecionar o Banco de Dados.</p>
+				<span class="instruction-arrow">➔</span>
+				<span class="instruction-step">2</span>
+				<p class="instruction-text">O Banco de Dados escolhido será utilizado em todo o seu <strong>Workspace</strong>.</p>
 			</div>
-		</div>
+		</section>
+
+		<!-- SECTION DO SETUP DA SENHA DO USUÁRIO -->
+
+		<section class="core-ui-section core-ui-hidden border-top-primary core-setup-password">
+
+			<div class="core-ui-badge badge-success">CADASTRO DE SENHA</div>
+			<h2 class="core-ui-title">Definição de Credencial de Acesso</h2>
+
+			<p class="core-ui-subtitle">
+				Sua conta foi criada com sucesso na <strong>ADX Global Base</strong>.<br />
+				Utilize os campos abaixo para definir a sua senha de acesso.<br />
+				A senha será salva utilizando criptografia <strong>Argon2id</strong>.
+			</p>
+
+			<form id="formSetupReativo" class="core-ui-form">
+
+				<div class="core-card-row">
+					<input type="password" id="setup_password" class="core-input-monospace" placeholder="Nova Senha" required minlength="6">
+					<input type="password" id="setup_confirm_password" class="core-input-monospace" placeholder="Confirme a Senha" required minlength="6">
+				</div>
+
+				<div class="core-form-actions">
+					<button type="submit" id="btnSubmitSetup" class="btn btn-primary">Salvar Senha</button>
+					<button type="button" id="btnCancelSetup" class="btn btn-secondary">Cancelar</button>
+				</div>
+
+			</form>
+
+			<p class="core-card-instruction text-center">
+				<strong>SEGURANÇA:</strong> Links de ativação possuem tempo de expiração determinado por token único hash persistido na tabela de usuários.
+			</p>
+
+		</section>
+
+		<!-- SECTION DO CONVERSOR DE BIN PARA HEX -->
+
+		<section class="core-ui-section core-ui-hidden border-top-primary core-tool-bin-hex">
+
+			<div class="core-ui-badge badge-success">CONVERSOR DE DADOS</div>
+			<h2 class="core-ui-title">Converter Bin para Hex</h2>
+
+			<p class="core-ui-subtitle text-center">
+				Gere strings hexadecimais limpas a partir de binários de persistência para consultas diretas:
+			</p>
+
+			<form id="formConverterReativo" class="core-ui-form">
+				<div class="core-card-row">
+					<input type="text" id="binInput" class="core-input-monospace" placeholder="Cole o Binary do Banco (0x...)">
+					<div class="core-output-wrapper">
+						<span id="hexOutput" class="core-output-monospace">INFORME O CÓDIGO BIN NO CAMPO AO LADO</span>
+					</div>
+				</div>
+			</form>
+
+			<p class="core-card-instruction text-center">
+				<strong>INSTRUÇÕES:</strong> Remova hífens e prefixos 0x automaticamente para usar nos filtros da API.
+			</p>
+
+		</section>
+
+		<!-- SECTION DE AUDIT COM TDD (TDDASH) -->
+
+		<section class="core-ui-section core-ui-hidden border-top-primary core-tool-tddash">
+
+			<div class="core-ui-badge badge-success">TESTES AUTOMATIZADOS</div>
+			<h2 class="core-ui-title">Auditoria de Qualidade (TDDash)</h2>
+
+			<p class="core-ui-subtitle text-center">
+				Monitore a integridade da arquitetura e cobertura de testes do ecossistema em tempo real:
+			</p>
+
+			<form id="formAuditReativo" class="core-ui-form">
+				<div class="core-card-row">
+					<button type="button" id="btnRunAudit">Gerar Documento de Auditoria</button>
+					<div id="auditResponseArea" class="core-output-wrapper">
+						<span id="auditMessage" class="core-output-monospace">CLIQUE NO BOTÃO AO LADO PARA GERAR O RELATÓRIO DE TESTES AUTOMATIZADOS</span>
+					</div>
+				</div>
+			</form>
+
+			<p class="core-card-instruction">
+				<strong>PIPELINE:</strong> Dispara o PHPUnit em tempo real no servidor local, valida os VOs e reconstrói o report HTML.
+			</p>
+
+		</section>
+
 	</div>
 
 	<script src="./assets/scripts/swagger-ui-bundle.js" charset="UTF-8"></script>

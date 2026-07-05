@@ -49,7 +49,7 @@ export class DatabaseUiController {
 		}
 
 		this.#purgeSwaggerSystem();
-		this.#handleUiTransition(isDefault);
+		this.handleUiTransition(isDefault);
 
 	}
 
@@ -85,8 +85,8 @@ export class DatabaseUiController {
 
 			const logoutBtn			= document.createElement('button');
 			logoutBtn.id				= 'core-btn-logout';
-			logoutBtn.className = 'btn core-logout-btn-premium';
-			logoutBtn.innerText = 'Encerrar sessão';
+			logoutBtn.className	= 'btn core-logout-btn-premium';
+			logoutBtn.innerText	= 'Encerrar sessão';
 
 			logoutBtn.onclick = (e) => {
 				e.preventDefault();
@@ -152,48 +152,62 @@ export class DatabaseUiController {
 
 	}
 
-	static #handleUiTransition(isDefault) {
+	static handleUiTransition(isDefault) {
 
 		const sections      = document.querySelectorAll('.swagger-ui section.block');
-		const utilsSection	= document.querySelector('.core-panel-container');
-		const welcomeScreen = document.querySelector('.core-welcome-screen');
+		const welcomeScreen = document.querySelector('.core-ui-section.core-welcome-screen');
+		const binHexScreen  = document.querySelector('.core-ui-section.core-tool-bin-hex');
+		const tddashScreen  = document.querySelector('.core-ui-section.core-tool-tddash');
 
 		requestAnimationFrame(() => {
 
 			if (isDefault) {
 				sections.forEach(s => s.classList.remove('core-display-block', 'core-animate-active'));
-				utilsSection?.classList.remove('core-display-block', 'core-animate-active');
-				this.#toggleWelcome(welcomeScreen, true);
+				this.toggleScreen(welcomeScreen, true);
+				this.toggleScreen(binHexScreen, false);
+				this.toggleScreen(tddashScreen, false);
 				return;
 			}
 
-			this.#toggleWelcome(welcomeScreen, false);
 			sections.forEach(s => s.classList.add('core-display-block'));
-			utilsSection?.classList.add('core-display-block');
+			this.toggleScreen(welcomeScreen, false);
+			this.toggleScreen(binHexScreen, true);
+			this.toggleScreen(tddashScreen, true);
 
 			requestAnimationFrame(() => {
 				sections.forEach(s => s.classList.add('core-animate-active'));
-				utilsSection?.classList.add('core-animate-active');
 			});
 
 		});
 
 	}
 
-	static #toggleWelcome(element, show) {
+	static toggleSections(show) {
+
+		if (!show) return;
+
+		const sectio= document.querySelectorAll('.swagger-ui section.block');
+
+		sections.forEach(s => s.classList.add('core-display-block'));
+
+		requestAnimationFrame(() => {
+			sections.forEach(s => s.classList.add('core-animate-active'));
+		});
+
+	}
+
+	static toggleScreen(element, show) {
 
 		if (!element) return;
 
 		if (show) {
-			element.classList.remove('core-fade-out');
-			element.style.display	= 'block';
-			element.style.height	= 'auto';
+			element.classList.remove('core-ui-hidden');
+			element.classList.add('core-ui-block');
 			return;
 		}
 
-		element.classList.add('core-fade-out');
-		element.style.height		= '0px';
-		element.style.overflow	= 'hidden';
+		element.classList.remove('core-ui-block');
+		element.classList.add('core-ui-hidden');
 
 	}
 

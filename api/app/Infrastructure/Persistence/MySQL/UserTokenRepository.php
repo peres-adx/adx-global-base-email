@@ -2,7 +2,8 @@
 
 namespace App\Infrastructure\Persistence\MySQL;
 
-use App\Domain\Repositories\Users\IUserTokenRepository; 
+use App\Domain\Repositories\Users\IUserTokenRepository;
+
 use CodeIgniter\Database\BaseConnection;
 
 class UserTokenRepository implements IUserTokenRepository
@@ -12,13 +13,28 @@ class UserTokenRepository implements IUserTokenRepository
 
 	public function __construct(private readonly BaseConnection $db) {}
 
-	public function saveInvite(string $userId, string $token): bool
+	//TODO: tirar os códigos com SQL e usar o padrão do CodeIgniter.
+	// Verificar toda a API para verificar se está tudo no mesmo padrão. 
+
+	public function saveInvite(string $userId, string $token, int $version = 1): bool
 	{
 
-		$sql = "INSERT INTO {$this->table}
-							(id, user_id, token, expires_at) VALUES (UNHEX(REPLACE(?, '-', '')), UNHEX(REPLACE(?, '-', '')), ?, ?)";
+		$tokenId = bin2hex(random_bytes(16));
 
-		return $this->db->query($sql, [ $userId, $userId, $token, date('Y-m-d H:i:s', strtotime('+24 hours')) ]);
+		return $this->db->table($this->table)
+											->set('id', "HEX('{$tokenId}')", false)
+											->set('user_id', "UNHEX(REPLACE('{$userId}', '-', ''))", false)
+											->set([
+												'token'				=> $token,
+												'version'			=> $version,
+												'expires_at'	=> date('Y-m-d H:i:s', strtotime('+24 hours'))
+											])
+											->insert();
+
+		return $this->db->table($this->table)
+											->set('id', "UNHEX('{$id}')", false)
+											->set($data)
+											->insert();
 
 	}
 
@@ -26,7 +42,7 @@ class UserTokenRepository implements IUserTokenRepository
 	{
 
 		$row = $this->db->table($this->table)
-										->select("HEX(user_id) as userId, expires_at")
+										->select("HEX(user_id) as userId, version, expires_at")
 										->where('token', $token)
 										->where('used_at', null)
 										->get()
@@ -36,7 +52,8 @@ class UserTokenRepository implements IUserTokenRepository
 
 		return (object) [
 			'userId'		=> $row->userId,
-			'isExpired' => strtotime($row->expires_at) < time()
+			'version'		=> (int) $row->version,
+			'isExpired'	=> strtotime($row->expires_at) < time()
 		];
 
 	}

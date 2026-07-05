@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>TDD Report — Global Tests</title>
 	<link rel="stylesheet" href="../utils/styles/simplePress.css" />
-	<link rel="stylesheet" href="assets/styles/tddash.css" />
+	<link rel="stylesheet" href="../audit/assets/styles/tddash.css" />
 </head>
 <body class="theme-dark">
 
@@ -729,13 +729,54 @@ D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\MockFa
 
 <script type="text/javascript">
 
+	// document.addEventListener('DOMContentLoaded', () => {
+
+	// 	const buttons		= document.querySelectorAll('.filter-btn');
+	// 	const rows			= document.querySelectorAll('.test-row');
+	// 	const sections	= document.querySelectorAll('main section');
+
+	// 	buttons.forEach(button => {
+
+	// 		button.addEventListener('click', () => {
+
+	// 			buttons.forEach(btn => btn.classList.remove('active'));
+	// 			button.classList.add('active');
+
+	// 			const filterValue = button.getAttribute('data-filter');
+
+	// 			rows.forEach(row => {
+	// 				const status = row.getAttribute('data-status');
+	// 				if (filterValue === 'all' || status === filterValue) {
+	// 					row.classList.remove('hide-by-filter');
+	// 				} else {
+	// 					row.classList.add('hide-by-filter');
+	// 				}
+	// 			});
+
+	// 			sections.forEach(section => {
+
+	// 				const totalRows		= section.querySelectorAll('.test-row').length;
+	// 				const hiddenRows	= section.querySelectorAll('.test-row.hide-by-filter').length;
+
+	// 				if (totalRows === hiddenRows) {
+	// 					section.classList.add('hide-by-filter');
+	// 				} else {
+	// 					section.classList.remove('hide-by-filter');
+	// 				}
+
+	// 			});
+
+	// 		});
+
+	// 	});
+
+	// });
+
 	document.addEventListener('DOMContentLoaded', () => {
 
-		console.log("[TDDash] Dashboard interativo carregado. Pronto para filtrar os testes!");
-
-		const buttons		= document.querySelectorAll('.filter-btn');
-		const rows			= document.querySelectorAll('.test-row');
-		const sections	= document.querySelectorAll('main section');
+		const buttons  = document.querySelectorAll('.filter-btn');
+		const rows     = document.querySelectorAll('.test-row');
+		const sections = document.querySelectorAll('main section');
 
 		buttons.forEach(button => {
 
@@ -747,24 +788,22 @@ D:\Projetos\wamp64\www\adx-global-base\api\tests\unit\Domain\ValueObjects\MockFa
 				const filterValue = button.getAttribute('data-filter');
 
 				rows.forEach(row => {
-					const status = row.getAttribute('data-status');
-					if (filterValue === 'all' || status === filterValue) {
-						row.classList.remove('hide-by-filter');
-					} else {
-						row.classList.add('hide-by-filter');
-					}
+
+					const status	= row.getAttribute('data-status');
+					const isMatch	= (filterValue === 'all' || status === filterValue);
+
+					row.classList.add('hide-by-filter');
+					if (isMatch) row.classList.remove('hide-by-filter');
+
 				});
 
 				sections.forEach(section => {
 
-					const totalRows = section.querySelectorAll('.test-row').length;
-					const hiddenRows = section.querySelectorAll('.test-row.hide-by-filter').length;
-
-					if (totalRows === hiddenRows) {
-						section.classList.add('hide-by-filter');
-					} else {
-						section.classList.remove('hide-by-filter');
-					}
+					const total		= section.querySelectorAll('.test-row').length;
+					const hidden	= section.querySelectorAll('.test-row.hide-by-filter').length;
+					
+					section.classList.remove('hide-by-filter');
+					if (total === hidden) section.classList.add('hide-by-filter');
 
 				});
 

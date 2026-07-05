@@ -8,7 +8,7 @@
 $xmlFile        = __DIR__ . '/../report/results.xml';
 $outputFile     = __DIR__ . '/../report/index.html';
 $cssPath        = '../utils/styles/simplePress.css';
-$tddashCssPath  = 'assets/styles/tddash.css';
+$tddashCssPath  = '../audit/assets/styles/tddash.css';
 
 if (!file_exists($xmlFile)) die("ERRO CRÍTICO: O arquivo results.xml não foi encontrado em: $xmlFile\n");
 
@@ -222,13 +222,54 @@ ob_start();
 
 <script type="text/javascript">
 
+	// document.addEventListener('DOMContentLoaded', () => {
+
+	// 	const buttons		= document.querySelectorAll('.filter-btn');
+	// 	const rows			= document.querySelectorAll('.test-row');
+	// 	const sections	= document.querySelectorAll('main section');
+
+	// 	buttons.forEach(button => {
+
+	// 		button.addEventListener('click', () => {
+
+	// 			buttons.forEach(btn => btn.classList.remove('active'));
+	// 			button.classList.add('active');
+
+	// 			const filterValue = button.getAttribute('data-filter');
+
+	// 			rows.forEach(row => {
+	// 				const status = row.getAttribute('data-status');
+	// 				if (filterValue === 'all' || status === filterValue) {
+	// 					row.classList.remove('hide-by-filter');
+	// 				} else {
+	// 					row.classList.add('hide-by-filter');
+	// 				}
+	// 			});
+
+	// 			sections.forEach(section => {
+
+	// 				const totalRows		= section.querySelectorAll('.test-row').length;
+	// 				const hiddenRows	= section.querySelectorAll('.test-row.hide-by-filter').length;
+
+	// 				if (totalRows === hiddenRows) {
+	// 					section.classList.add('hide-by-filter');
+	// 				} else {
+	// 					section.classList.remove('hide-by-filter');
+	// 				}
+
+	// 			});
+
+	// 		});
+
+	// 	});
+
+	// });
+
 	document.addEventListener('DOMContentLoaded', () => {
 
-		console.log("[TDDash] Dashboard interativo carregado. Pronto para filtrar os testes!");
-
-		const buttons		= document.querySelectorAll('.filter-btn');
-		const rows			= document.querySelectorAll('.test-row');
-		const sections	= document.querySelectorAll('main section');
+		const buttons  = document.querySelectorAll('.filter-btn');
+		const rows     = document.querySelectorAll('.test-row');
+		const sections = document.querySelectorAll('main section');
 
 		buttons.forEach(button => {
 
@@ -240,24 +281,22 @@ ob_start();
 				const filterValue = button.getAttribute('data-filter');
 
 				rows.forEach(row => {
-					const status = row.getAttribute('data-status');
-					if (filterValue === 'all' || status === filterValue) {
-						row.classList.remove('hide-by-filter');
-					} else {
-						row.classList.add('hide-by-filter');
-					}
+
+					const status	= row.getAttribute('data-status');
+					const isMatch	= (filterValue === 'all' || status === filterValue);
+
+					row.classList.add('hide-by-filter');
+					if (isMatch) row.classList.remove('hide-by-filter');
+
 				});
 
 				sections.forEach(section => {
 
-					const totalRows = section.querySelectorAll('.test-row').length;
-					const hiddenRows = section.querySelectorAll('.test-row.hide-by-filter').length;
-
-					if (totalRows === hiddenRows) {
-						section.classList.add('hide-by-filter');
-					} else {
-						section.classList.remove('hide-by-filter');
-					}
+					const total		= section.querySelectorAll('.test-row').length;
+					const hidden	= section.querySelectorAll('.test-row.hide-by-filter').length;
+					
+					section.classList.remove('hide-by-filter');
+					if (total === hidden) section.classList.add('hide-by-filter');
 
 				});
 

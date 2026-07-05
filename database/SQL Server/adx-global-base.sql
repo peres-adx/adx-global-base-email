@@ -1,7 +1,7 @@
 USE [master]
 GO
 
-/****** Object:  Database [adx-global-base]    Script Date: 14/06/2026 11:03:54 ******/
+/****** Object:  Database [adx-global-base]    Script Date: 05/07/2026 22:44:53 ******/
 CREATE DATABASE [adx-global-base]
  CONTAINMENT = NONE
  ON  PRIMARY 

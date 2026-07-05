@@ -103,6 +103,81 @@ Documentação viva via Swagger UI integrada com ferramentas de utilidade (como 
 - **Endpoint:** POST /api/users/setup/master (JSON: { "secret": "ADX_MASTER_RECOVERY_2026" }).
 - **Swagger:** Acesse /docs ou o caminho configurado no seu servidor local.
 
+
+## Como usar
+
+### O projeto utiliza a estratégia Turnkey (chave na mão), bastando seguir os simples passos abaixo:
+
+- **Requisitos:** PHP 8.3+, MySQL 8.0+, SQLite3 ou SQL Server.
+- **Estrutura de Pastas:** O ecossistema está distribuído em `/api` (Backend PHP), `/database` (Persistência) e `/docs` (Custom Swagger UI).
+- **Base de Dados:** Importe o arquivo apropriado de acordo com a engine selecionada.
+- **Setup Master:** Execute o endpoint de recuperação para criar o administrador inicial.
+- **Swagger:** Acesse `/docs` ou o caminho correspondente no seu servidor local.
+
+### Configuração de Ambiente (`.env`)
+
+Duplique o arquivo `.env.example` na raiz da pasta `/api` para `.env` e configure os barramentos de SMTP, JWT e as strings de conexão dinâmicas de cada motor de banco de dados conforme o blueprint operacional abaixo:
+
+```properties
+app.baseURL           = 'http://localhost:8080/'
+app.frontendURL       = "http://localhost:8080/adx-global-base/docs/"
+(Ou a porta/URL que estiver utilizando em seu ambiente)
+
+# SMTP Engine (Onboarding Workflow)
+app.baseURL           = 'http://localhost:8080/'
+app.frontendURL       = "http://localhost:8080/adx-global-base/docs/"
+
+# SMTP Engine (Onboarding Workflow)
+email.protocol        = 'smtp'
+email.SMTPHost        = 'your_smtp_host'
+email.SMTPUser        = 'your_smtp_user'
+email.SMTPPass        = 'your_secure_smtp_password'
+email.SMTPAuth        = true
+email.SMTPPort        = 587
+email.SMTPCrypto      = 'tls'
+email.fromEmail       = 'your_from_email'
+email.fromName        = 'Your App Name'
+
+CI_ENVIRONMENT        = development
+
+# Active Infrastructure Strategy (MySQL, SQLite, SQLServer)
+DB_ENGINE             = SQLite
+
+# MySQL Connection Details
+MYSQL_DRIVER          = MySQLi
+MYSQL_HOSTNAME        = localhost
+MYSQL_DATABASE        = your_mysql_db
+MYSQL_USERNAME        = your_mysql_user
+MYSQL_PASSWORD        = your_mysql_password
+MYSQL_PCONNECT        = false
+MYSQL_DBDEBUG         = true
+
+# SQLite Connection Details
+SQLITE_DRIVER         = SQLite3
+SQLITE_DATABASE       = writable/database/adx-global-base.sqlite
+SQLITE_PCONNECT       = false
+SQLITE_DBDEBUG        = true
+SQLITE_FOREIGNKEYS    = true
+
+# SQL Server Connection Details
+SQLSERVER_DRIVER      = SQLSRV
+SQLSERVER_HOSTNAME    = localhost\SQLServer
+SQLSERVER_DATABASE    = your_mssql_db
+SQLSERVER_USERNAME    = your_mssql_user
+SQLSERVER_PASSWORD    = your_secure_mssql_password
+SQLSERVER_CHARSET     = utf8
+
+# Cryptographic Token Rules
+JWT_SECRET            = 'your_random_32_bytes_base64_secret_key'
+JWT_EXPIRES_IN        = 86400
+JWT_ISSUER            = 'adx-global-base'
+JWT_AUDIENCE          = 'adx-global-base'
+
+# Disaster Recovery Shared Secret
+SECRET_MASTER         = "your_custom_master_recovery_secret"
+
+```
+
 ## Endpoints da API
 
 ## Auth & Recovery (Públicos)
@@ -112,12 +187,27 @@ Documentação viva via Swagger UI integrada com ferramentas de utilidade (como 
 | **POST** | /login | Autenticação e geração de JWT | {"email": "...", "password": "..."} |
 | **OPTIONS** | /login | Pre-flight CORS | - |
 | **POST** | /api/users/setup/master | Criar Admin inicial (Recovery) | {"secret": "ADX_MASTER_RECOVERY_2026"} |
+| **POST** | /api/users/setup-password | Definir senha inicial via token de convite | {"token": "...", "password": "..."} |
 
 ## TDD & Auditoria (Públicos)
 
 | **MÉTODO** | **ENDPOINT** | **DESCRIÇÃO** | **PAYLOAD (JSON)** |
 | :--- | :--- | :--- | :--- |
 | **GET** | /api/tests/audit | Execute o comando **composer test:report**, gerando um arquivo de Report com os Testes Unitários | { Returna a URL com o Relatório de Auditoria }
+
+## Users (Usuários)
+
+Filtro: auth (Bearer Token obrigatório).
+
+**SECURITY UPGRADE (v2):** O endpoint `POST /api/users` adota um fluxo *passwordless* no cadastro inicial. O usuário é criado com a senha nula e um token criptográfico de uso único é disparado via SMTP. A definição da senha (em Argon2id) ocorre de forma assíncrona pelo link de onboarding no endpoint de ativação.
+
+| **MÉTODO** | **ENDPOINT** | **DESCRIÇÃO** |
+| :--- | :--- | :--- |
+| **GET** | /api/users | Listar todos os usuários do sistema |
+| **POST** | /api/users | Cadastrar novo usuário (Senha nula + Disparo de Convite) |
+| **GET** | /api/users/{id} | Detalhes de um usuário específico (ID Hex) |
+| **PUT** | /api/users/{id} | Atualizar dados do usuário |
+| **DELETE** | /api/users/{id} | Remover usuário |
 
 ## Users (Usuários)
 
@@ -169,6 +259,7 @@ Filtro: auth (Bearer Token obrigatório).
 | **Smart Auto-Auth** | Customização do Swagger para captura automática do JWT no Login e injeção instantânea no Header Authorize via Modal. |
 | **Swagger Utility** | Conversor `bin2hex` integrado ao rodapé da documentação (/docs (swagger)) para facilitar o debug. |
 | **TDDash Automated Auditor** | Botão integrado na UI do Swagger que faz a chamada para o barramento de testes local, dispara o PHPUnit, limpa o log de regressão de dados e injeta o link do relatório interativo de cobertura diretamente na tela. |
+| **Token-Based Onboarding** | Desacoplamento de credenciais no POST de usuários, isolando a criação da senha em um fluxo focado em convites e segurança de borda. |
 
 ## IA com SDD (Spec-Driven Development)
 

@@ -6,6 +6,7 @@ use App\Domain\Common\Result;
 use App\Domain\Entities\User;
 use App\Domain\Repositories\Users\IUserRepository;
 use App\Domain\ValueObjects\{Cpf, Email, Uuid};
+
 use CodeIgniter\Database\BaseConnection;
 
 class UserRepository implements IUserRepository
@@ -122,20 +123,24 @@ class UserRepository implements IUserRepository
 
 	}
 
-	public function exists(Email $email, Cpf $cpf, ?Uuid $excludeId = null): bool
-  {
+	public function exists(Email $email, ?Cpf $cpf, ?Uuid $excludeId = null): bool
+	{
 
-    $builder = $this->db->table($this->table);
+		$builder = $this->db->table($this->table);
 
-    if ($excludeId) $builder->where('id !=', "UNHEX('{$excludeId}')", false);
+		$excludeId && $builder->where('id !=', $this->formatUuidFilter($excludeId), false);
 
-    return $builder->groupStart()
-                     ->where('email', (string) $email)
-                     ->orWhere('cpf', (string) $cpf)
-                   ->groupEnd()
-									 ->countAllResults() > 0;
+		$identifiers = array_filter([
+			'email' => (string) $email,
+			'cpf'   => $cpf ? (string) $cpf : null
+		]);
 
-  }
+		return $builder->groupStart()
+						   ->orWhere($identifiers)
+					   ->groupEnd()
+					   ->countAllResults() > 0;
+
+	}
 
 	public function existsById(Uuid $id): bool 
   {

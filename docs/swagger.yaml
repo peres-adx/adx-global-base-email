@@ -3,7 +3,7 @@ info:
   title: ADX GLOBAL BASE - API RESTful
   description: >
     Custom Swagger - Por Rafael Peres.
-  version: 1.0.0
+  version: 2.0.0
 
 servers:
   - url: http://localhost:8080/adx-global-base/api
@@ -26,19 +26,18 @@ components:
   schemas:
     User:
       type:               object
-      required:           [name, email, password]
+      required:           [name, email, cpf]
       properties:
-        name:             { type: string, example: "Rafael Peres" }
-        email:            { type: string, example: "rafapress@yahoo.com" }
-        password:         { type: string, example: "123456" }
-        cpf:              { type: string, example: "30786708808" }
-        rg:               { type: string, example: "42.031.782-2" }
-        phone:            { type: string, example: "19999299014" }
-        address:          { type: string, example: "Rua dos Carneiros" }
-        zipcode:          { type: string, example: "13.271-605" }
-        number:           { type: number, example: 18 }
-        district:         { type: string, example: "Paiquerê" }
-        city:             { type: string, example: "Valinhos" }
+        name:             { type: string, example: "Leonardo Maia" }
+        email:            { type: string, example: "leo.maia@gmail.com" }
+        cpf:              { type: string, example: "36073089856" }
+        rg:               { type: string, example: "33.331.981-8" }
+        phone:            { type: string, example: "(19) 99999-8888" }
+        address:          { type: string, example: "Rua dos Tucanos" }
+        zipcode:          { type: string, example: "33.179-501" }
+        number:           { type: number, example: 180 }
+        district:         { type: string, example: "Centro" }
+        city:             { type: string, example: "Campinas" }
         fu:               { type: string, example: "SP" }
 
     Customer:
@@ -51,12 +50,12 @@ components:
         cpf:              { type: string, example: "31014331420" }
         rg:               { type: string, example: "12.555.782-8" }
         age:              { type: number, example: 30 }
-        phone:            { type: string, example: "19999299014" }
+        phone:            { type: string, example: "(11) 99999-9999" }
         address:          { type: string, example: "Rua dos Sabiás" }
-        zipcode:          { type: string, example: "13.271-650" }
-        number:           { type: number, example: 280 }
-        district:         { type: string, example: "Centro" }
-        city:             { type: string, example: "Valinhos" }
+        zipcode:          { type: string, example: "03.811-344" }
+        number:           { type: number, example: 1920 }
+        district:         { type: string, example: "Bela Vista" }
+        city:             { type: string, example: "São Paulo" }
         fu:               { type: string, example: "SP" }
 
     Order:
@@ -298,31 +297,3 @@ paths:
           required:   true
           schema:     { type: string }
       responses:      { '200': { description: "OK" } }
-
-  /tests/audit:
-    get:
-      tags:           [ Auditoria / TDD ]
-      summary:        "Gerar Documento de Auditoria (TDDash)"
-      description:    "Dispara o PHPUnit em background e compila o relatório estático de testes unitários."
-      responses:
-        '200':
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AuditResponse'
-
-  /api/status:
-    get:
-      tags:           [ Infraestrutura ]
-      summary:        "Checar status e dependências da API"
-      responses:
-        '200':
-          description: "OK"
-          content:
-            application/json:
-              example:
-                status: "success"
-                detail: "API operando normalmente."
-                database: "SQL Server"
-                environment: "development"

@@ -78,9 +78,9 @@ export class DevOpsService {
 
 		if (!this.#msg || !this.#area) return;
 
-		this.#msg.style.color    = color;
-		this.#msg.innerHTML       = html;
-		this.#area.style.display  = 'block';
+		this.#msg.style.color			= color;
+		this.#msg.innerHTML				= html;
+		this.#area.style.display	= 'block';
 
 	}
 

@@ -57,16 +57,19 @@ body {
 		line-height: 1.6;
 	}
 
-/* Filtros Dinâmicos */
 .dashboard-filters {
-	display: inline-flex;
+	/* display: block; */
 	background: #1A1A1E;
 	padding: 6px;
 	border-radius: 8px;
 	border: 1px solid #222;
-	gap: 8px;
+	gap: 10px;
 	margin-bottom: 25px;
 	width: 100%;
+
+	max-width: max-content;
+	margin: 0 auto;
+
 }
 
 .filter-btn {
@@ -74,27 +77,27 @@ body {
 	border: none;
 	border: 1px solid transparent;
 	color: var(--text-muted);
-	padding: 10px 20px;
+	padding: 12px 25px;
 	font-size: 13px;
 	font-weight: 600;
-	border-radius: 6px;
+	border-radius: 5px;
 	cursor: pointer;
-	display: flex;
+	display: inline-block;
 	align-items: center;
-	gap: 8px;
-	transition: all 0.2s ease;
+	gap: 10px;
+	transition: all 0.5s ease;
 }
 
-.filter-btn:hover {
-	color: #FFF;
-	background: rgba(255, 255, 255, 0.02);
-}
+	.filter-btn:hover {
+		background: rgba(255, 255, 255, 0.02);
+		color: #FFF;
+	}
 
-.filter-btn.active {
-	background: #121212;
-	color: #FFF;
-	box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-}
+	.filter-btn.active {
+		background: #121212;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+		color: #FFF;
+	}
 
 .filter-btn[data-filter="all"].active { border: 1px solid rgba(59, 23, 218, 0.3); }
 .filter-btn[data-filter="pass"].active { border: 1px solid rgba(197, 255, 33, 0.3); }

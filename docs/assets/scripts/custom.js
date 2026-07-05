@@ -1,16 +1,22 @@
 /**
  * Architect and developed by Rafael Peres
- * Core Infrastructure Services - ESM Edition
+ * Core Infrastructure Services - ESM
  * Architecture: Clean Code, Reactive UI & High Performance
- * Standards: SOLID, DRY, Flat/Linear Code, Guard Clauses, No-Elses, Single Responsibility, Separation of Concerns
+ * Standards: SOLID, DRY, Flat/Linear Code, Guard Clauses, No-Elses, Single Responsibility, Separation of Concerns, ESM and Custom Events
  */
 
-import { DatabaseUiController } from './modules/DatabaseUiController.js';
-import { AutoAuthService }      from './modules/AutoAuthService.js';
-import { DevOpsService }        from './modules/DevOpsService.js';
-import { HexMapper }            from './modules/HexMapper.js';
+import { DatabaseUiController }		from './modules/DatabaseUiController.js';
+import { AutoAuthService }				from './modules/AutoAuthService.js';
+import { DevOpsService }					from './modules/DevOpsService.js';
+import { HexMapper }							from './modules/HexMapper.js';
+import { SetupPasswordEngine }		from './modules/SetupPasswordEngine.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+
+	SetupPasswordEngine.checkRouteAndIntercept();
+
+	const urlParams = new URLSearchParams(window.location.search);
+	if (urlParams.get('token')) return; 
 
 	if (window.location.hash) history.replaceState("", document.title, window.location.pathname + window.location.search);
 
@@ -18,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const headerObserver	= new MutationObserver((_, obs) => {
 
 		const dbSelect = document.querySelector('.swagger-ui select[data-variable="database"]');
+
 		if (!dbSelect) return;
 
 		dbSelect.addEventListener('change', (e) => DatabaseUiController.toggleWorkspace(e.target.value));
@@ -31,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		const output = document.getElementById('hexOutput');
 		if (!output) return;
-
+  
 		const inputVal		= e.target.value.trim();
 		output.innerText	= inputVal ? HexMapper.transform(inputVal) : "INFORME O CÓDIGO BIN NO CAMPO AO LADO";
 
@@ -41,8 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	document.addEventListener('click', (e) => {
 
-		const { target } = e;
-		const targetText = target.innerText?.toUpperCase() || '';
+		const { target }	= e;
+		const targetText	= target.innerText?.toUpperCase() || '';
 
 		const routes = [
 		{

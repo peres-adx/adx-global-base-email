@@ -68,13 +68,14 @@ export class AutoAuthService {
 
 			if (!attr.innerText.includes('accessToken')) return;
 
-			const tokenSpan = attr.nextElementSibling?.nextElementSibling;
+			const tokenSpan	= attr.nextElementSibling?.nextElementSibling;
 			const rawToken	= tokenSpan?.innerText.replace(/"/g, '');
 
 			if (!rawToken || rawToken.length <= 50) return;
 
 			navigator.clipboard.writeText(rawToken);
 			this.applyAuthorization(rawToken);
+
 			observer.disconnect();
 
 		});

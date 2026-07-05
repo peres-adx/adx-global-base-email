@@ -1,10 +1,18 @@
-.phpunit.result.cache
-*.log
+api/.phpunit.result.cache
+api/*.log
 .vscode/
 
 api/.env
 
-api/writable/database/*.sqlite
-database/sqlite/*.sqlite
+api/public/debug_*.php
 
 preview.png
+
+api/writable/cache/*
+api/writable/debugbar/*
+api/writable/logs/*
+api/writable/session/*
+api/writable/uploads/*
+
+!api/writable/**/.html
+!api/writable/**/.gitkeep
